@@ -31,6 +31,12 @@ app.get('/admin', (req, res) => {
 admin.on('connection', (socket) => {
     let address = socket.handshake.address.replace('::ffff:', '');
     console.log(`Se ha conectado ${address} a /admin`)
+
+    socket.on('shower', (data) => {
+        console.log(data);
+        viewer.emit('shower', data);
+    });
+
     socket.on('disconnect', () => {
         console.log('User disconnected');
     });

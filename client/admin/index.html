@@ -22,38 +22,38 @@
                     <th colspan="2">Activadores</th>
                 </tr>
                 <tr>
-                    <td id="youtube" colspan="2" class="centered">
-                        <button type="button" name="button" class="btn btn-danger activador" id="btn-youtube">
-                            <i class="fab fa-youtube fa-2x"></i>
+                    <td id="youtube">
+                        <button type="button" name="button" class="btn btn-danger activador" id="btn-youtube" data-selector="youtube">
+                            <i class="fab fa-youtube fa-2x" data-selector="youtube"></i>
                         </button>
                     </td>
-                    <td id="youtube-progress">
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                    <td class="progress-container" id="youtube-progress">
+                        <div class="progress show-progressbar">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <button type="button" name="button" class="btn btn-facebook activador" id="btn-facebook">
-                            <i class="fab fa-facebook-f fa-2x"></i>
+                    <td id="facebook">
+                        <button type="button" name="button" class="btn btn-facebook activador" id="btn-facebook" data-selector="facebook">
+                            <i class="fab fa-facebook-f fa-2x" data-selector="facebook"></i>
                         </button>
                     </td>
-                    <td>
-                        <div class="progress" id="progress-facebook">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                    <td class="progress-container" id="facebook-progress">
+                        <div class="progress show-progressbar" >
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <button type="button" name="button" class="btn btn-primary activador" id="btn-banner">
-                            <span>Banner</span>
+                    <td id="banner">
+                        <button type="button" name="button" class="btn btn-primary activador" id="btn-banner" data-selector="banner">
+                            <span data-selector="banner">Banner</span>
                         </button>
                     </td>
-                    <td>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                    <td class="progress-container" id="banner-progress">
+                        <div class="progress show-progressbar">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
                         </div>
                     </td>
                 </tr>
