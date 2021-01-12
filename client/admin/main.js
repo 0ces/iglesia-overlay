@@ -36,7 +36,10 @@ $(document).ready(() => {
             if (i%101 === 100){
                 $(`#btn-${selector}`).prop('disabled', false);
                 clearInterval(interval);
-                toggleProgressBar(selector);
+                setTimeout(() => {
+                    $(`#${selector}-progress>div>div`).css('width', '0%');
+                    toggleProgressBar(selector);
+                }, 2000);
             }
         }, 5000/100);
     });
