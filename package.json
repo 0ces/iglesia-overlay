@@ -4,7 +4,7 @@
   "description": "OBS web powered overlay",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,14 @@
   "bugs": {
     "url": "https://github.com/0ces/iglesia-overlay/issues"
   },
-  "homepage": "https://github.com/0ces/iglesia-overlay#readme"
+  "homepage": "https://github.com/0ces/iglesia-overlay#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^3.0.5",
+    "socket.io-client": "^3.0.5",
+    "sqlite3": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
