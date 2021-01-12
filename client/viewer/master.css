@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    color: #fff;
+}
+
+.circle {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg-facebook {
+    background: #3b5998;
+}
+
+.bg-youtube {
+    background: #ff0000;
+}
+
+.letrero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 120px;
+    width: 600px;
+    text-align: center;
+    font-style: 'Segoe UI';
+    font-size: 30px;
+    position: absolute;
+    top: 40px;
+    left: 50px;
+    border-radius: 20px;
+    padding-left: 100px;
+    z-index: -1;
+}
+
+.show {
+    animation: fade-in 2s forwards;
+}
+
+.show .letrero {
+    width: 0px;
+    animation: expand 2s 1s forwards;
+}
+
+.show .letrero p {
+    opacity: 0;
+    animation: fade-in 1s 2.5s forwards;
+}
+
+.hide {
+    animation: fade-out 2s 2.5s forwards;
+}
+
+.hide .letrero {
+    animation: retract 2s 1s forwards;
+}
+
+.hide .letrero p {
+    opacity: 1;
+    animation: fade-out 1s forwards;
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes retract {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes expand {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 100%;
+    }
+
+}
+
+.shower {
+    filter: drop-shadow(-1px 6px 3px rgba(0, 0, 0, 0.5));
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    height: 200px;
+    width: 600px;
+}

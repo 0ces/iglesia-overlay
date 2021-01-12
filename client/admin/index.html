@@ -2,16 +2,71 @@
 <html lang="es" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title>OVERLAY</title>
+        <title>ADMIN</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
         <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="./master.css">
         <script src="./main.js" charset="utf-8"></script>
     </head>
     <body>
-        <button type="button" class="btn btn-primary">Primary</button>
+        <table>
+            <tbody>
+                <tr>
+                    <th colspan="2">Activadores</th>
+                </tr>
+                <tr>
+                    <td id="youtube" colspan="2" class="centered">
+                        <button type="button" name="button" class="btn btn-danger activador" id="btn-youtube">
+                            <i class="fab fa-youtube fa-2x"></i>
+                        </button>
+                    </td>
+                    <td id="youtube-progress">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button" name="button" class="btn btn-facebook activador" id="btn-facebook">
+                            <i class="fab fa-facebook-f fa-2x"></i>
+                        </button>
+                    </td>
+                    <td>
+                        <div class="progress" id="progress-facebook">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button" name="button" class="btn btn-primary activador" id="btn-banner">
+                            <span>Banner</span>
+                        </button>
+                    </td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="2">Configuración</th>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label for="">Tema</label>
+                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </body>
 </html>
