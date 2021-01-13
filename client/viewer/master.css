@@ -26,7 +26,7 @@
     align-items: center;
     justify-content: center;
     height: 120px;
-    width: 600px;
+    width: 800px;
     text-align: center;
     font-style: 'Segoe UI';
     font-size: 30px;
@@ -49,15 +49,15 @@
 
 .show .letrero p {
     opacity: 0;
-    animation: fade-in 1s 2.5s forwards;
+    animation: fade-in 1s 2s forwards;
 }
 
 .hide {
-    animation: fade-out 2s 2.5s forwards;
+    animation: fade-out 2s 2s forwards;
 }
 
 .hide .letrero {
-    animation: retract 2s 1s forwards;
+    animation: retract 2s .5s forwards;
 }
 
 .hide .letrero p {
@@ -108,5 +108,5 @@
     bottom: 50px;
     left: 50px;
     height: 200px;
-    width: 600px;
+    width: 800px;
 }

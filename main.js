@@ -33,7 +33,7 @@ admin.on('connection', (socket) => {
     console.log(`Se ha conectado ${address} a /admin`)
 
     socket.on('shower', (data) => {
-        console.log(data);
+        socket.broadcast.emit('shower', data);
         viewer.emit('shower', data);
     });
 

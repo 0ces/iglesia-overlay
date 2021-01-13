@@ -12,11 +12,29 @@ function toggleProgressBar(selector) {
     }
 }
 
+function activate(selector){
+    toggleProgressBar(selector);
+    let i = 0;
+    $(`#btn-${selector}`).prop('disabled', true);
+    let interval = setInterval(() => {
+        i++;
+        $(`#${selector}-progress>div>div`).css('width', `${i%101}%`);
+        if (i%101 === 100){
+            $(`#btn-${selector}`).prop('disabled', false);
+            clearInterval(interval);
+            setTimeout(() => {
+                $(`#${selector}-progress>div>div`).css('width', '0%');
+                toggleProgressBar(selector);
+            }, 2000);
+        }
+    }, 5000/100);
+}
+
 $(document).ready(() => {
     const socket = io('/admin');
 
-    socket.on('init', () => {
-
+    socket.on('shower', (data) => {
+        activate(data.nombre);
     });
 
     $('.activador').each((index) => {
@@ -27,21 +45,7 @@ $(document).ready(() => {
     $('.activador').click((e) => {
         let selector = $(e.target).attr('data-selector');
         socket.emit('shower', {nombre: selector});
-        toggleProgressBar(selector);
-        let i = 0;
-        $(`#btn-${selector}`).prop('disabled', true);
-        let interval = setInterval(() => {
-            i++;
-            $(`#${selector}-progress>div>div`).css('width', `${i%101}%`);
-            if (i%101 === 100){
-                $(`#btn-${selector}`).prop('disabled', false);
-                clearInterval(interval);
-                setTimeout(() => {
-                    $(`#${selector}-progress>div>div`).css('width', '0%');
-                    toggleProgressBar(selector);
-                }, 2000);
-            }
-        }, 5000/100);
+        activate(selector);
     });
 });
 
