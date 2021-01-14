@@ -4,6 +4,21 @@
     color: #fff;
 }
 
+@font-face {
+    font-family: 'StayGirly';
+    src: url('../static/Stay-Girly.woff');
+}
+
+@font-face {
+    font-family: 'Bebas Neue';
+    src: url('../static/BebasNeue-Regular.woff');
+}
+
+@font-face {
+    font-family: 'Coolvetica';
+    src: url('../static/coolvetica-rg.woff');
+}
+
 img {
     max-width:100%;
     height:auto;
@@ -117,36 +132,79 @@ img {
 }
 
 .banner {
-    filter: drop-shadow(-1px 6px 3px rgba(0, 0, 0, 0.5));
+    /* filter: drop-shadow(-1px 6px 3px rgba(0, 0, 0, 0.5)); */
+    filter: drop-shadow(1px 1px 20px rgba(109,83,242,1));
     position: absolute;
-    bottom: 50px;
+    bottom: 20px;
     transform: translate(-50%, 0%);
     left: 50vw;
     width: 1200px;
-    height: 200px;
+    height: 300px;
     background: transparent;
 }
 
 .banner-container {
-    
+    position: relative;
+    height: 100%;
 }
 
 .logo-container {
+    position: absolute;
+    top: 50px;
     background: linear-gradient(45deg, rgba(109,83,242,1) 0%, rgba(68,221,230,1) 100%);
     border-radius: 20px;
     transform: rotate(45deg);
     width: 200px;
+    /* box-shadow: 1px 1px 30px rgba(109,83,242,1); */
 }
 
 .logo {
     transform: rotate(-45deg) scale(1.3);
+    filter: drop-shadow(-1px 6px 3px rgba(0, 0, 0, 0.5));
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .banner .main {
+    position: absolute;
+    top: 0;
+    left: 100px;
+    z-index: -1;
     width: 1100px;
     height: 100%;
-    background: #f00;
+    /* background: #f00; */
+}
+
+.banner .main .titulo {
+    position: absolute;
+    border-radius: 0px 20px 20px 0px;
+    top: 60px;
+    width: 100%;
+    height: 180px;
+    background: linear-gradient(90deg, rgba(83,123,242,1) 0%, rgba(68,221,230,1) 100%);
+    display: flex;
+    align-items: center;
+    padding-left: 150px;
+}
+
+.live-online {
+    font-size: 85px;
+    font-family: 'StayGirly';
+    text-shadow: 5px 5px 10px rgba(0,0,0,.8);
+    letter-spacing: 3px;
+    padding-left: 20px;
+}
+
+.encabezado {
+    font-family: 'Montserrat';
+    text-shadow: 5px 5px 10px rgba(0,0,0,.8);
+    position: absolute;
+    top: 25px;
+    right: 20px;
+    background: linear-gradient(90deg, rgba(83,123,242,1) 0%, rgba(68,221,230,1) 100%);
+    box-shadow: -1px 3px 10px rgba(0, 0, 0, 0.5);
+    padding: 20px 80px;
+    border-radius: 20px;
+    font-size: 28px;
 }
