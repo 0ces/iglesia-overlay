@@ -330,5 +330,5 @@ img {
 
 .hide .logo-container {
     left: 0;
-    animation: roll-out 2.5s 4s forwards, pos-to-center 2s 2s forwards, shadow-logo 10s infinite;
+    animation: roll-out 2.5s 3.5s forwards, pos-to-center 2s 1.5s forwards, shadow-logo 10s infinite;
 }
