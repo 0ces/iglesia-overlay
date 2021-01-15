@@ -1,11 +1,29 @@
-const socket = io('/viewer');
+$(document).ready(() => {
+    const socket = io('/viewer');
 
-socket.on('shower', (data) => {
-    $(`.${data.nombre}`).toggleClass('hide show');
-    setTimeout(() => {
+    socket.on('shower', (data) => {
         $(`.${data.nombre}`).toggleClass('hide show');
-    }, 5000);
+        setTimeout(() => {
+            $(`.${data.nombre}`).toggleClass('hide show');
+        }, 5000);
+    });
+
+    socket.on('banner', (checked) => {
+        console.log(checked);
+        if (!checked && $('.banner').hasClass('show')){
+            $('.banner').removeClass('show');
+            $('.banner').addClass('hide');
+        }
+        if (checked && $('.banner').hasClass('hide')){
+            $('.banner').removeClass('hide');
+            $('.banner').addClass('show');
+        }
+
+    });
 });
+
+
+
 
 // setInterval(() => {
 //

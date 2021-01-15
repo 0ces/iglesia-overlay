@@ -47,6 +47,11 @@ $(document).ready(() => {
         socket.emit('shower', {nombre: selector});
         activate(selector);
     });
+
+    $('#banner-switch').change((e) => {
+        console.log(e);
+        socket.emit('banner', $(e.target).prop('checked'));
+    });
 });
 
 // setInterval(() => {

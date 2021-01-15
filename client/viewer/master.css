@@ -58,7 +58,7 @@ img {
     z-index: -1;
 }
 
-.show {
+.show.shower {
     animation: fade-in 2s forwards;
 }
 
@@ -72,7 +72,7 @@ img {
     animation: fade-in 1s 2s forwards;
 }
 
-.hide {
+.hide.shower {
     animation: fade-out 2s 2s forwards;
 }
 
@@ -124,10 +124,19 @@ img {
 
 @keyframes roll-in {
     from {
-        transform: scale(.5) rotate(-360deg);
+        transform: scale(0) rotate(-360deg);
     }
     to {
         transform: scale(1) rotate(45deg);
+    }
+}
+
+@keyframes roll-out {
+    from {
+        transform: scale(1) rotate(45deg);
+    }
+    to {
+        transform: scale(0) rotate(-360deg);
     }
 }
 
@@ -137,6 +146,15 @@ img {
     }
     100% {
         left: 0%;
+    }
+}
+
+@keyframes pos-to-center {
+    0% {
+        left: 0%;
+    }
+    100% {
+        left: 50%;
     }
 }
 
@@ -186,7 +204,7 @@ img {
     background: linear-gradient(45deg, rgba(109,83,242,1) 0%, rgba(68,221,230,1) 100%);
     transform: rotate(45deg);
     width: 200px;
-    animation: roll-in 2.5s, center-to-pos 2s 2.5s forwards, shadow-logo 10s infinite;
+    animation: shadow-logo 10s infinite;
 }
 
 .logo {
@@ -206,7 +224,6 @@ img {
     width: 0;
     height: 100%;
     /* filter: drop-shadow(1px 1px 20px rgba(109,83,242,1)); */
-    animation: expand 2s 4.5s forwards;
 }
 
 .banner .main .titulo {
@@ -240,7 +257,7 @@ img {
     padding: 15px 80px;
     border-radius: 20px;
     font-size: 28px;
-    animation: fade-in 2s 5s forwards;
+
     opacity: 0;
 }
 
@@ -260,11 +277,42 @@ img {
     text-shadow: 5px 5px 10px rgba(0,0,0,.8);
     border-radius: 20px;
     font-size: 28px;
-    animation: fade-in 2s 5s forwards, expand 5s 3.2s forwards;
     opacity: 0;
 }
 
-.banner .main span {
+.show.banner .main span {
     opacity: 0;
     animation: fade-in 2s 5s forwards;
+}
+
+.show .logo-container {
+    animation: roll-in 2.5s, center-to-pos 2s 2.5s forwards, shadow-logo 10s infinite;
+}
+
+.banner.show .main {
+    animation: expand 2s 4.5s forwards;
+}
+
+.show .encabezado {
+    animation: fade-in 2s 5s forwards;
+}
+
+.show .contacto {
+    animation: fade-in 2s 5s forwards, expand 5s 3.2s forwards;
+}
+
+.hide.banner .main span {
+    opacity: 1;
+    animation: fade-out 1s forwards;
+}
+
+.hide.banner .main {
+    width: 100%;
+    opacity: 1;
+    animation: fade-out 2s forwards;
+}
+
+.hide .logo-container {
+    left: 0;
+    animation: roll-out 2.5s 4s forwards, pos-to-center 2s 2s forwards, shadow-logo 10s infinite;
 }

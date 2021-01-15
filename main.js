@@ -40,6 +40,10 @@ admin.on('connection', (socket) => {
     socket.on('disconnect', () => {
         console.log('User disconnected');
     });
+
+    socket.on('banner', (checked) => {
+        viewer.emit('banner', checked);
+    });
 })
 
 viewer.on('connection', (socket) => {
