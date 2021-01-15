@@ -37,6 +37,10 @@ $(document).ready(() => {
         activate(data.nombre);
     });
 
+    socket.on('banner', (checked) => {
+        $('#banner-switch').prop('checked', checked);
+    });
+
     $('.activador').each((index) => {
         let selector = $($('.activador')[index]).attr('data-selector');
         toggleProgressBar(selector);

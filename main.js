@@ -42,6 +42,7 @@ admin.on('connection', (socket) => {
     });
 
     socket.on('banner', (checked) => {
+        socket.broadcast.emit('banner', checked);
         viewer.emit('banner', checked);
     });
 })
