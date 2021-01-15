@@ -302,7 +302,7 @@ img {
 }
 
 .show .logo-container {
-    animation: roll-in 2.5s, center-to-pos 2s 2.5s forwards, shadow-logo 10s infinite;
+    animation: roll-in 2.5s, center-to-pos 2s 2.5s forwards, shadow-logo 5s infinite;
 }
 
 .banner.show .main {
@@ -330,5 +330,5 @@ img {
 
 .hide .logo-container {
     left: 0;
-    animation: roll-out 2.5s 3.5s forwards, pos-to-center 2s 1.5s forwards, shadow-logo 10s infinite;
+    animation: roll-out 2.5s 3.5s forwards, pos-to-center 2s 1.5s forwards, shadow-logo 5s infinite;
 }

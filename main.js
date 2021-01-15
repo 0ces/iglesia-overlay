@@ -1,4 +1,4 @@
-const sqlite3 = require('sqlite3').verbose();
+// const sqlite3 = require('sqlite3').verbose();
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
@@ -6,12 +6,12 @@ const io = require('socket.io')(http);
 const admin = io.of('/admin');
 const viewer = io.of('/viewer')
 
-let db = new sqlite3.Database('./db/database.db', sqlite3.OPEN_CREATE, (err) => {
-  if (err) {
-    console.error(err.message);
-  }
-  console.log('Connected to the database.');
-});
+// let db = new sqlite3.Database('./db/database.db', sqlite3.OPEN_CREATE, (err) => {
+//   if (err) {
+//     console.error(err.message);
+//   }
+//   console.log('Connected to the database.');
+// });
 
 app.use(express.static(__dirname + "/client"));
 app.use(express.static(__dirname + "/client/viewer"));
