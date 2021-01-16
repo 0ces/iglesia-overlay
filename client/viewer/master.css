@@ -421,3 +421,17 @@ img {
     position: absolute;
     top: 58%;
 }
+
+.pantalla {
+    background: #000;
+}
+
+.show.pantalla {
+    opacity: 0;
+    animation: fade-in 2s forwards;
+}
+
+.hide.pantalla {
+    opacity: 1;
+    animation: fade-out 2s forwards;
+}

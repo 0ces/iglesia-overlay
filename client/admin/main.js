@@ -66,6 +66,32 @@ $(document).ready(() => {
         $(e.target).addClass('changer-active');
         socket.emit('changer', {logo: $(e.target).attr('logo-name')});
     });
+
+    $('.scene-switcher button').click((e) => {
+        let seleccionado = $(e.target).attr('value');
+        if (!$(e.target).hasClass('checked')){
+            $('.scene-switcher button').removeClass('checked');
+            $(e.target).addClass('checked');
+        }
+        socket.emit('scene', seleccionado);
+        setTimeout(() => {
+            switch (seleccionado) {
+                case 'inicio':
+                    $('.banner-switch button')[1].click();
+                    break;
+                case 'main':
+                    $('.banner-switch button')[0].click();
+                    break;
+                case 'fin':
+                    $('.banner-switch button')[1].click();
+                    break;
+            }
+        }, 2000);
+    });
+
+    timer = new Timer(5*60,'.timer',() => {
+        $('.timer').text('Estamos por comenzar')
+    });
 });
 
 // setInterval(() => {

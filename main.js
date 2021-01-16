@@ -64,7 +64,13 @@ admin.on('connection', (socket) => {
     });
 
     socket.on('changer', (data) =>  {
+        socket.broadcast.emit('changer', data);
         viewer.emit('changer', data);
+    });
+
+    socket.on('scene', seleccionado => {
+        socket.broadcast.emit('scene', seleccionado);
+        viewer.emit('scene', seleccionado);
     });
 })
 

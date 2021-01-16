@@ -1,54 +1,4 @@
-function pad (str, max) {
-  str = str.toString();
-  return str.length < max ? pad("0" + str, max) : str;
-}
 
-function isUndefined (variable) {
-    return typeof variable === 'undefined';
-}
-
-class Timer {
-    constructor(segundos, elemento, callback, frecuent_callback){
-        this.segundos = segundos;
-        this.elemento = elemento;
-        this.callback = callback;
-        this.frecuent_callback = frecuent_callback;
-        this.interval = setInterval(() => {
-            if (!isUndefined(this.elemento)){
-                this.reducirElemento();
-            } else {
-                this.reducir();
-            }
-            if (!isUndefined(this.frecuent_callback)){
-                frecuent_callback();
-            }
-        }, 1000);
-    }
-
-    reducirElemento(){
-        $(this.elemento).text(this.getString());
-        this.reducir();
-    }
-
-    reducir(){
-        this.segundos--;
-        if(this.segundos < 0){
-            this.stop();
-            this.callback();
-        }
-    }
-
-    getString(){
-        let minutos = Math.floor(this.segundos/60);
-        let segundos = this.segundos%60;
-        return `${pad(minutos,1)}:${pad(segundos,2)}`
-    }
-
-    stop(){
-        $(this.elemento).text('');
-        clearInterval(this.interval);
-    }
-}
 
 $(document).ready(() => {
     const socket = io('/viewer');
@@ -99,6 +49,30 @@ $(document).ready(() => {
     timer = new Timer(5,'.timer',() => {
         $('.timer').text('Estamos por comenzar');
         console.log('CALLBACK');
+    });
+
+    socket.on('scene', (seleccionado) => {
+        console.log(seleccionado);
+        $('.pantalla').removeClass('show');
+        $('.pantalla').addClass('hide');
+        switch (seleccionado) {
+            case 'inicio':
+                $('#inicio').removeClass('hide');
+                $('#inicio').addClass('show');
+                $('#inicio video').get(0).play();
+                break;
+            case 'main':
+                $('.pantalla').removeClass('show');
+                $('.pantalla').addClass('hide');
+                $('.pantalla video').each((i, e) => {
+                    e.pause()
+                });
+                break;
+            case 'fin':
+                $('#fin').removeClass('hide');
+                $('#fin').addClass('show');
+                break;
+        }
     });
 
 });

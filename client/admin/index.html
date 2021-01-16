@@ -11,6 +11,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="./master.css">
+        <script src="../common/main.js" charset="utf-8"></script>
         <script src="./main.js" charset="utf-8"></script>
     </head>
     <body>
@@ -22,9 +23,18 @@
                 <tr>
                     <td colspan="3">
                         <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-outline-secondary changer changer-active" logo-name="logo-512.png">Caldas</button>
-                            <button type="button" class="btn btn-outline-secondary changer" logo-name="logoJovenes-512.png">Jovenes</button>
-                            <button type="button" class="btn btn-outline-secondary changer" logo-name="logoExploradores-512.png">Exploradores</button>
+                            <button type="button" class="btn btn-outline-primary changer changer-active" logo-name="logo-512.png">Caldas</button>
+                            <button type="button" class="btn btn-outline-primary changer" logo-name="logoJovenes-512.png">Jovenes</button>
+                            <button type="button" class="btn btn-outline-primary changer" logo-name="logoExploradores-512.png">Exploradores</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <div class="btn-group scene-switcher" role="group">
+                            <button type="button" class="btn btn-outline-primary checked" value="inicio">Inicio</button>
+                            <button type="button" class="btn btn-outline-primary" value="main">Main</button>
+                            <button type="button" class="btn btn-outline-primary" value="fin">Fin</button>
                         </div>
                     </td>
                 </tr>
@@ -46,7 +56,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <input type="text" class="form-control" placeholder="Timer">
+                        <input type="text" class="form-control timer" placeholder="Timer">
                     </td>
                     <td>
                         <button type="button" class="btn btn-outline-primary" name="button">Empezar</button>
