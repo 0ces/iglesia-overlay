@@ -1,6 +1,6 @@
 {
   "name": "iglesia-overlay",
-  "version": "1.0.0",
+  "version": "1.2.4",
   "description": "OBS web powered overlay",
   "main": "main.js",
   "bin": "main.js",
@@ -8,8 +8,13 @@
     "start": "nodemon index.js"
   },
   "pkg": {
-    "assets": [ "node_modules/**/*", "client/**/*" ],
-    "targets": [ "node10-win-x64" ]
+    "assets": [
+      "node_modules/**/*",
+      "client/**/*"
+    ],
+    "targets": [
+      "node10-win-x64"
+    ]
   },
   "repository": {
     "type": "git",

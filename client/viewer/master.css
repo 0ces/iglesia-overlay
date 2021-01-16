@@ -86,6 +86,16 @@ img {
     animation: fade-out 1s forwards;
 }
 
+.show.logos {
+    opacity: 0;
+    animation: fade-in 1s 5s forwards;
+}
+
+.hide.logos {
+    opacity: 1;
+    animation: fade-out 1s forwards;
+}
+
 @keyframes fade-out {
     from {
         opacity: 1;

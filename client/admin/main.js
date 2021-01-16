@@ -38,7 +38,9 @@ $(document).ready(() => {
     });
 
     socket.on('banner', (checked) => {
-        $('#banner-switch').prop('checked', checked);
+        if (!$(`#${checked}-switch`).hasClass('checked')){
+            $('.banner-switch button').toggleClass('checked');
+        }
     });
 
     $('.activador').each((index) => {
@@ -52,9 +54,11 @@ $(document).ready(() => {
         activate(selector);
     });
 
-    $('#banner-switch').change((e) => {
-        console.log(e);
-        socket.emit('banner', $(e.target).prop('checked'));
+    $('.banner-switch button').click((e) => {
+        if (!$(e.target).hasClass('checked')){
+            $('.banner-switch button').toggleClass('checked');
+        }
+        socket.emit('banner', $(e.target).attr('value'));
     });
 
     $('.changer').click((e) => {

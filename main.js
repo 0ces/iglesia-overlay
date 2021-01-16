@@ -1,10 +1,24 @@
 // const sqlite3 = require('sqlite3').verbose();
 const express = require('express');
 const app = express();
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
+const http = require('http');
+const server1 = http.Server(app);
+const fs = require('fs');
+const path = require('path');
+const io = require('socket.io')(server1);
 const admin = io.of('/admin');
-const viewer = io.of('/viewer')
+const viewer = io.of('/viewer');
+
+const server2 = http.createServer((req, res) => {
+    let stream = fs.createReadStream(path.join('.', req.url));
+    stream.on('error', function() {
+        res.writeHead(404);
+        res.end();
+    });
+    stream.pipe(res);
+}).listen(3001, () => {
+    console.log('Listening for files requests on *:3001');
+});
 
 // let db = new sqlite3.Database('./db/database.db', sqlite3.OPEN_CREATE, (err) => {
 //   if (err) {
@@ -15,6 +29,9 @@ const viewer = io.of('/viewer')
 
 app.use(express.static(__dirname + "/client"));
 app.use(express.static(__dirname + "/client/viewer"));
+fs.mkdir(path.join('.', '/videos'), { recursive: true }, (err) => {
+    if (err) throw err;
+});
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/client/viewer/index.html');
@@ -59,6 +76,6 @@ viewer.on('connection', (socket) => {
     });
 });
 
-http.listen(3000, () => {
-    console.log('listening on *:3000');
+server1.listen(3000, () => {
+    console.log('Listening on *:3000');
 });

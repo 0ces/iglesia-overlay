@@ -17,7 +17,7 @@
         <script src="./main.js" charset="utf-8"></script>
     </head>
     <body>
-        <div class="banner show">
+        <div class="banner hide">
             <div class="banner-container">
                 <div class="main">
                     <div class="titulo">
@@ -67,23 +67,22 @@
                 <i class="fab fa-youtube fa-7x"></i>
             </div>
         </div>
-        <div class="full pantalla">
-            <video src="../static/1.mp4" autoplay loop muted width="1920" height="1080" class="blur">
-
+        <div class="full pantalla" style="display:none;">
+            <video src="http://localhost:3001/videos/1.mp4" autoplay loop muted width="1920" height="1080" class="blur">
             </video>
             <div class="full inicio">
                 <h1>
                     Estamos a punto de empezar
                 </h1>
-                <h2 class="timer">5:00</h2>
+                <h2 class="timer"></h2>
             </div>
-            <div class="logos">
-                <div class="logo-inicio">
-                    <img src="../static/logo-512.png" alt="" class="logo">
-                </div>
-                <div class="logo-movimiento">
-                    <img src="../static/logoMMM-512.png" alt="">
-                </div>
+        </div>
+        <div class="logos show">
+            <div class="logo-inicio">
+                <img src="../static/logo-512.png" alt="" class="logo">
+            </div>
+            <div class="logo-movimiento">
+                <img src="../static/logoMMM-512.png" alt="">
             </div>
         </div>
     </body>

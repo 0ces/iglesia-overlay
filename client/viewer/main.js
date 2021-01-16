@@ -39,11 +39,13 @@ class Timer {
 
     stop(){
         clearInterval(this.interval);
+        $(this.elemento).text('');
     }
 }
 
 $(document).ready(() => {
     const socket = io('/viewer');
+    let timer;
 
     socket.on('shower', (data) => {
         $('.banner').addClass('blur-ani');
@@ -58,13 +60,17 @@ $(document).ready(() => {
     });
 
     socket.on('banner', (checked) => {
-        if (!checked && $('.banner').hasClass('show')){
+        if (checked === 'logo' && $('.banner').hasClass('show')){
             $('.banner').removeClass('show');
             $('.banner').addClass('hide');
+            $('.logos').removeClass('hide');
+            $('.logos').addClass('show');
         }
-        if (checked && $('.banner').hasClass('hide')){
+        if (checked === 'banner' && $('.banner').hasClass('hide')){
             $('.banner').removeClass('hide');
             $('.banner').addClass('show');
+            $('.logos').removeClass('show');
+            $('.logos').addClass('hide');
         }
 
     });
@@ -73,7 +79,17 @@ $(document).ready(() => {
         $('.logo').attr('src', `../static/${data.logo}`);
     });
 
-    new Timer(5*60,'.timer',() => {});
+    socket.on('timer', (data) => {
+        if (typeof timer === 'undefined'){
+            timer.stop();
+        }
+        timer = new Timer(data.minutos*60,'.timer',() => {
+
+        });
+
+    });
+
+
 });
 
 
