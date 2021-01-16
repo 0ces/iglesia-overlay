@@ -69,6 +69,10 @@ $(document).ready(() => {
 
     });
 
+    socket.on('changer', (data) => {
+        $('.logo').attr('src', `../static/${data.logo}`);
+    });
+
     new Timer(5*60,'.timer',() => {});
 });
 

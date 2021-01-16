@@ -56,6 +56,12 @@ $(document).ready(() => {
         console.log(e);
         socket.emit('banner', $(e.target).prop('checked'));
     });
+
+    $('.changer').click((e) => {
+        $('.changer-active').removeClass('changer-active');
+        $(e.target).addClass('changer-active');
+        socket.emit('changer', {logo: $(e.target).attr('logo-name')});
+    });
 });
 
 // setInterval(() => {

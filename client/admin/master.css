@@ -13,9 +13,11 @@ body {
     padding: 10px;
 }
 
-.btn {
+.activador {
     border-radius: 10px;
     margin: 10px;
+    width: 80px;
+    height: 80px;
 }
 
 .btn-facebook {
@@ -26,11 +28,6 @@ body {
 .btn-facebook:hover {
     background: #365696;
     color: #fff;
-}
-
-.activador {
-    width: 80px;
-    height: 80px;
 }
 
 tbody th {
@@ -76,4 +73,10 @@ td {
 
 .progress-container {
     width: 40vw;
+}
+
+.changer-active {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
 }

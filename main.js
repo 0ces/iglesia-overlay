@@ -45,6 +45,10 @@ admin.on('connection', (socket) => {
         socket.broadcast.emit('banner', checked);
         viewer.emit('banner', checked);
     });
+
+    socket.on('changer', (data) =>  {
+        viewer.emit('changer', data);
+    });
 })
 
 viewer.on('connection', (socket) => {
