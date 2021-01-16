@@ -3,31 +3,38 @@ function pad (str, max) {
   return str.length < max ? pad("0" + str, max) : str;
 }
 
+function isUndefined (variable) {
+    return typeof variable === 'undefined';
+}
+
 class Timer {
-    constructor(segundos, elemento, callback){
+    constructor(segundos, elemento, callback, frecuent_callback){
         this.segundos = segundos;
         this.elemento = elemento;
         this.callback = callback;
-        if (typeof this.elemento !== 'undefined'){
-            this.interval = setInterval(() => {
+        this.frecuent_callback = frecuent_callback;
+        this.interval = setInterval(() => {
+            if (!isUndefined(this.elemento)){
                 this.reducirElemento();
-            }, 1000);
-        } else {
-            this.interval = setInterval(() => {
-                this.reducir()
-            },1000);
-        }
+            } else {
+                this.reducir();
+            }
+            if (!isUndefined(this.frecuent_callback)){
+                frecuent_callback();
+            }
+        }, 1000);
     }
 
     reducirElemento(){
-        this.reducir();
         $(this.elemento).text(this.getString());
+        this.reducir();
     }
 
     reducir(){
         this.segundos--;
-        if(this.segundos === 0){
+        if(this.segundos < 0){
             this.stop();
+            this.callback();
         }
     }
 
@@ -38,8 +45,8 @@ class Timer {
     }
 
     stop(){
-        clearInterval(this.interval);
         $(this.elemento).text('');
+        clearInterval(this.interval);
     }
 }
 
@@ -84,11 +91,15 @@ $(document).ready(() => {
             timer.stop();
         }
         timer = new Timer(data.minutos*60,'.timer',() => {
-
+            $('.timer').text('Estamos por comenzar')
         });
 
     });
 
+    timer = new Timer(5,'.timer',() => {
+        $('.timer').text('Estamos por comenzar');
+        console.log('CALLBACK');
+    });
 
 });
 

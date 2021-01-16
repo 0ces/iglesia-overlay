@@ -45,7 +45,7 @@ $(document).ready(() => {
 
     $('.activador').each((index) => {
         let selector = $($('.activador')[index]).attr('data-selector');
-        toggleProgressBar(selector);
+        // toggleProgressBar(selector);
     });
 
     $('.activador').click((e) => {
