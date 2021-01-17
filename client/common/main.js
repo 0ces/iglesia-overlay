@@ -46,7 +46,8 @@ class Timer {
     }
 
     stop(){
-        $(this.elemento).text('');
         clearInterval(this.interval);
+        $(this.elemento).text('');
+        $(this.elemento).val('');
     }
 }

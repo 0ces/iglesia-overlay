@@ -64,7 +64,7 @@ $(document).ready(() => {
     $('.changer').click((e) => {
         $('.changer-active').removeClass('changer-active');
         $(e.target).addClass('changer-active');
-        socket.emit('changer', {logo: $(e.target).attr('logo-name')});
+        socket.emit('changer', {logo: $(e.target).attr('logo-name'), nombre: $(e.target).attr('nombre')});
     });
 
     $('.scene-switcher button').click((e) => {
@@ -89,9 +89,20 @@ $(document).ready(() => {
         }, 2000);
     });
 
-    timer = new Timer(5*60,'.timer',() => {
-        $('.timer').text('Estamos por comenzar')
+    $('#timer-empezar').click(() => {
+        let minutos = $('.timer').val();
+        timer = new Timer(minutos*60,'.timer',() => {
+            $('.scene-switcher button')[1].click();
+        });
+        socket.emit('timer', {minutos: minutos, parar: false});
     });
+
+    $('#timer-parar').click(() => {
+        timer.stop();
+        socket.emit('timer', {minutos: null, parar: true});
+    });
+
+
 });
 
 // setInterval(() => {

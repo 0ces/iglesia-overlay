@@ -72,6 +72,10 @@ admin.on('connection', (socket) => {
         socket.broadcast.emit('scene', seleccionado);
         viewer.emit('scene', seleccionado);
     });
+
+    socket.on('timer', (data) => {
+        viewer.emit('timer', data);
+    });
 })
 
 viewer.on('connection', (socket) => {

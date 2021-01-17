@@ -19,6 +19,11 @@
     src: url('../static/coolvetica-rg.woff');
 }
 
+@font-face {
+    font-family: 'Shopie';
+    src: url('../static/Shopie.woff');
+}
+
 img {
     max-width:100%;
     max-height: 100%;
@@ -59,8 +64,27 @@ img {
     z-index: -1;
 }
 
+.show {
+    opacity: 0;
+    animation: fade-in 2s forwards;
+}
+
+.hide {
+    opacity: 1;
+    animation: fade-out 2s forwards;
+}
+
+.jovenes {
+    font-family: 'Shopie';
+    font-size: 85px;
+}
+
 .show.shower {
     animation: fade-in 2s forwards;
+}
+
+.disable {
+    display: none;
 }
 
 .show .letrero {
@@ -274,6 +298,9 @@ img {
 .live-online {
     font-size: 85px;
     font-family: 'StayGirly';
+}
+
+.titulo span {
     text-shadow: 5px 5px 10px rgba(0,0,0,.8);
     letter-spacing: 3px;
     padding-left: 180px;
@@ -377,7 +404,7 @@ img {
 }
 
 .blur {
-    filter: blur(2px);
+    filter: blur(5px);
 }
 
 .logos {
