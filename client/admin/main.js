@@ -62,9 +62,13 @@ $(document).ready(() => {
     });
 
     socket.on('youtube-state-change', () => {
-        console.log('Se dejó de reproducir');
         $('.pause-btn').hide();
         $('.play-btn').show();
+    });
+
+    socket.on('youtube-playing', () => {
+        $('.play-btn').hide();
+        $('.pause-btn').show();
     });
 
     socket.on('youtube-data', (data) => {
@@ -76,6 +80,14 @@ $(document).ready(() => {
         $('#video-current-time-label').text(minutosAString(data.currentTime));
         $('#video-duration').text(minutosAString(data.duration));
     })
+
+    $('.play-btn').click(() => {
+        socket.emit('youtube-play');
+    });
+
+    $('.pause-btn').click(() => {
+        socket.emit('youtube-pause');
+    });
 
     $('.activador').each((index) => {
         let selector = $($('.activador')[index]).attr('data-selector');
@@ -102,7 +114,10 @@ $(document).ready(() => {
     });
 
     $('.logo-pos div').click((e) => {
-        socket.emit('logo-pos', logoPosClick($(e.target)));
+        let _ = logoPosClick($(e.target));
+        if (_ < 5){
+            socket.emit('logo-pos', _);
+        }
     });
 
     $('.changer').click((e) => {
@@ -168,7 +183,6 @@ $(document).ready(() => {
     });
 
     $('.conf-video>input').on('keypress', (e) => {
-        console.log(e);
         if (e.which == 13){
             let elem = $(e.target);
             socket.emit('youtube-source', {ID: elem.attr('data-id'), YTID: elem.val()});

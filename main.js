@@ -89,6 +89,14 @@ admin.on('connection', (socket) => {
     socket.on('get-youtube-current-time', () => {
         viewer.emit('get-youtube-current-time');
     });
+
+    socket.on('youtube-play', () => {
+        viewer.emit('youtube-play');
+    });
+
+    socket.on('youtube-pause', () => {
+        viewer.emit('youtube-pause');
+    });
 })
 
 viewer.on('connection', (socket) => {
@@ -109,6 +117,10 @@ viewer.on('connection', (socket) => {
 
     socket.on('youtube-current-time', (data) => {
         admin.emit('youtube-current-time', data);
+    });
+
+    socket.on('youtube-playing', () => {
+        admin.emit('youtube-playing');
     });
 });
 

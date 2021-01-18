@@ -40,7 +40,7 @@ function getDataFromPlayer(player) {
 
 function onPlayerReady(event) {
     let player = event.target;
-    player.playVideo();
+    // player.playVideo();
     // player.pauseVideo();
     player.setPlaybackQuality('hd1080');
     socket.emit('youtube-data', getDataFromPlayer(player));
@@ -50,6 +50,8 @@ function onStateChange(event) {
     let player = event.target;
     if (player.getPlayerState() !== 1) {
         socket.emit('youtube-state-change');
+    } else {
+        socket.emit('youtube-playing');
     }
 }
 
@@ -59,7 +61,6 @@ $(document).ready(() => {
 
     socket.on('shower', (data) => {
         $('.banner').addClass('blur-ani');
-        console.log($('.banner'))
         $(`.${data.nombre}`).toggleClass('hide show');
         setTimeout(() => {
             $(`.${data.nombre}`).toggleClass('hide show');
@@ -77,14 +78,14 @@ $(document).ready(() => {
         if (checked === 'logo' && $('.banner').hasClass('show')){
             $('.banner').removeClass('show');
             $('.banner').addClass('hide');
-            $('.logos').removeClass('hide');
-            $('.logos').addClass('show');
+            $('.logos').removeClass('hide-any');
+            setTimeout(()=>{$('.logos').addClass('show-any')}, 5000);
         }
         if (checked === 'banner' && $('.banner').hasClass('hide')){
             $('.banner').removeClass('hide');
             $('.banner').addClass('show');
-            $('.logos').removeClass('show');
-            $('.logos').addClass('hide');
+            $('.logos').removeClass('show-any');
+            $('.logos').addClass('hide-any');
         }
 
     });
@@ -94,7 +95,6 @@ $(document).ready(() => {
         $('.titulo div').addClass('disable');
         $(`.${data.nombre}`).removeClass('disable');
         $('.contacto-container').addClass('disable');
-        console.log(data);
         switch (data.nombre) {
             case 'live-online':
                 $('.contacto-container').removeClass('disable');
@@ -180,7 +180,7 @@ $(document).ready(() => {
                 'onStateChange': onStateChange,
             },
             playerVars: {
-                'autoplay': 1,
+                // 'autoplay': 1,
                 'controls': 0,
             }
         });
@@ -188,9 +188,16 @@ $(document).ready(() => {
     });
 
     socket.on('get-youtube-current-time', () => {
-        console.log(currentPlayer);
         if (currentPlayer)
         socket.emit('youtube-current-time', getDataFromPlayer(currentPlayer));
+    });
+
+    socket.on('youtube-play', () => {
+        currentPlayer.playVideo();
+    });
+
+    socket.on('youtube-pause', () => {
+        currentPlayer.pauseVideo();
     });
 
 });
