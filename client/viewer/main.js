@@ -1,3 +1,17 @@
+function fadeVol(player, duration) {
+    const initial_vol = player.getVolume();
+    let volumen = initial_vol;
+    let interval = setInterval(() => {
+        if (volumen > -1){
+            player.setVolume(volumen);
+            volumen--;
+        }  else {
+            clearInterval(interval);
+            player.pauseVideo();
+        }
+    }, duration*1000/initial_vol);
+}
+
 var tag = document.createElement('script');
 
 tag.src = "https://www.youtube.com/iframe_api";
@@ -9,27 +23,28 @@ function onYouTubeIframeAPIReady() {
     player = new YT.Player('YTPlayer', {
         height: '1920',
         width: '1080',
-        videoId: 'eRUM70CPYls',
+        videoId: '',
         events: {
-        'onReady': onPlayerReady
+            'onReady': onPlayerReady
         },
         playerVars: {
             'autoplay': 1,
-            // 'controls': 0,
-            'cc_load_policy': 1
+            'controls': 0,
         }
     });
-    setTimeout(()=>{$('#YTPlayer').contents().find('.ytp-subtitles-button.ytp-button').click();},1000);
 
 }
 
 function onPlayerReady(event) {
     event.target.playVideo();
+    player.setPlaybackQuality('hd1080');
+    // player.seekTo(player.getDuration()/2, true);
 }
 
 $(document).ready(() => {
     const socket = io('/viewer');
     let timer;
+    let volumen = 100;
 
     socket.on('shower', (data) => {
         $('.banner').addClass('blur-ani');
@@ -45,8 +60,7 @@ $(document).ready(() => {
 
     // setTimeout(() => {
     //     $('#YTPlayer').replaceWith('<div id="YTPlayer" class="full"></div>');
-    //
-    // }, 10000);
+    // }, 5000);
 
     socket.on('banner', (checked) => {
         if (checked === 'logo' && $('.banner').hasClass('show')){
@@ -83,7 +97,8 @@ $(document).ready(() => {
         }
         if (!data.parar){
             timer = new Timer(data.minutos*60,'.timer',() => {
-                $('.timer').text('Estamos por comenzar')
+                $('.timer').text('Estamos por comenzar');
+                fadeVol(player, 5);
             });
         } else {
             timer.stop();
@@ -91,7 +106,6 @@ $(document).ready(() => {
     });
 
     socket.on('scene', (seleccionado) => {
-        console.log(seleccionado);
         $('.pantalla').removeClass('show');
         $('.pantalla').addClass('hide');
         switch (seleccionado) {
@@ -112,6 +126,29 @@ $(document).ready(() => {
                 $('#fin').addClass('show');
                 break;
         }
+    });
+
+    socket.on('logo-pos', selected => {
+        $('.logos').toggleClass('hide-any show-any');
+        setTimeout(() => {
+            $('.logos').removeClass('top bottom left right');
+            switch (selected) {
+                case 1:
+                    $('.logos').addClass('top left');
+                    break;
+                case 2:
+                    $('.logos').addClass('top right');
+                    break;
+                case 3:
+                    $('.logos').addClass('bottom left');
+                    break;
+                case 4:
+                    $('.logos').addClass('bottom right');
+                    break;
+            }
+            $('.logos').toggleClass('hide-any show-any');
+            // setTimeout(()=>{$('.logos').removeClass('show-any');},2000);
+        }, 2500);
     });
 
 });

@@ -76,6 +76,11 @@ admin.on('connection', (socket) => {
     socket.on('timer', (data) => {
         viewer.emit('timer', data);
     });
+
+    socket.on('logo-pos', selected => {
+        socket.broadcast.emit('logo-pos', selected);
+        viewer.emit('logo-pos', selected);
+    })
 })
 
 viewer.on('connection', (socket) => {

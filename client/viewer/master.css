@@ -64,12 +64,12 @@ img {
     z-index: -1;
 }
 
-.show {
+.show-any {
     opacity: 0;
     animation: fade-in 2s forwards;
 }
 
-.hide {
+.hide-any {
     opacity: 1;
     animation: fade-out 2s forwards;
 }
@@ -410,12 +410,12 @@ img {
 .logos {
     filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.5));
     position: absolute;
-    right: 30px;
-    bottom: 30px;
+    opacity: 0;
     width: 250px;
     height: 100px;
     display: inline-flex;
     align-items: center;
+    transition: all 1s;
 }
 
 .logo-inicio::after {
@@ -424,7 +424,24 @@ img {
     top: 10%;
     content: "";
     height: 80%;
-    border-right: 2px dashed #fff;
+    border-right: 1px solid rgba(255,255,255,0.7);
+    /* animation: separation-ani 1s forwards; */
+}
+
+.bottom {
+    bottom: 30px;
+}
+
+.top {
+    top: 30px;
+}
+
+.left {
+    left: 30px;
+}
+
+.right {
+    right: 30px;
 }
 
 .logo-inicio {

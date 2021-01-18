@@ -30,6 +30,18 @@ function activate(selector){
     }, 5000/100);
 }
 
+function logoPosClick(selected) {
+    let i;
+    for (i = 1; i < 5; i++){
+        if ($(selected).hasClass(`logo-pos-${i}`) && !$(selected).hasClass('checked')){
+            $('.logo-pos div').removeClass('checked');
+            $(selected).addClass('checked');
+            break;
+        }
+    }
+    return i;
+}
+
 $(document).ready(() => {
     const socket = io('/admin');
 
@@ -41,6 +53,10 @@ $(document).ready(() => {
         if (!$(`#${checked}-switch`).hasClass('checked')){
             $('.banner-switch button').toggleClass('checked');
         }
+    });
+
+    socket.on('logo-pos', selected => {
+        logoPosClick($(`.logo-pos-${selected}`))
     });
 
     $('.activador').each((index) => {
@@ -58,7 +74,17 @@ $(document).ready(() => {
         if (!$(e.target).hasClass('checked')){
             $('.banner-switch button').toggleClass('checked');
         }
-        socket.emit('banner', $(e.target).attr('value'));
+        let selected = $(e.target).attr('value');
+        if (selected === 'logo'){
+            $('.logo-pos').show();
+        } else {
+            $('.logo-pos').hide();
+        }
+        socket.emit('banner', selected);
+    });
+
+    $('.logo-pos div').click((e) => {
+        socket.emit('logo-pos', logoPosClick($(e.target)));
     });
 
     $('.changer').click((e) => {
@@ -102,7 +128,11 @@ $(document).ready(() => {
         socket.emit('timer', {minutos: null, parar: true});
     });
 
-
+    $('.timer').on('keypress', (e) => {
+        if(e.which == 13){
+            $('#timer-empezar').click();
+        }
+    });
 });
 
 // setInterval(() => {

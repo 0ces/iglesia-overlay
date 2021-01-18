@@ -92,3 +92,52 @@ td {
 .banner-switch {
 
 }
+
+.conf {
+    padding: 10px;
+}
+
+.conf input {
+    margin: 10px 0px;
+}
+
+.logo-pos {
+    margin: 0px auto;
+    position: relative;
+    width: 150px;
+    height: calc(150px * (9/16));
+}
+
+.logo-pos div {
+    position: absolute;
+    cursor: pointer;
+    width: 50%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-pos div:hover {
+    background-color: #007bff;
+}
+
+.logo-pos-1 {
+    top: 0;
+    left: 0;
+}
+
+.logo-pos-2 {
+    top: 0;
+    right: 0;
+}
+
+.logo-pos-3 {
+    bottom: 0;
+    left: 0;
+}
+
+.logo-pos-4 {
+    bottom: 0;
+    right: 0;
+}
