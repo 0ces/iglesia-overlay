@@ -94,11 +94,42 @@ td {
 }
 
 .conf {
+
+}
+
+.conf>div {
+    /* margin: 10px 0px; */
     padding: 10px;
 }
 
-.conf input {
-    margin: 10px 0px;
+.conf label {
+    font-size: 14px;
+    text-align: left;
+    width: 100%;
+}
+
+.mini-label {
+    font-size: 10px !important;
+}
+
+.duration-times {
+    width: inherit;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.duration-times label {
+    width: fit-content;
+    width: -moz-fit-content;
+}
+
+.fill {
+    width: 100%;
+}
+
+.conf .conf-video input {
+    text-align: center;
 }
 
 .logo-pos {
@@ -140,4 +171,20 @@ td {
 .logo-pos-4 {
     bottom: 0;
     right: 0;
+}
+
+.conf-controls {
+    /* position: relative; */
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    /* height: 100px; */
+}
+
+.play-container {
+    /* position: absolute; */
+    /* transform: translate(-50%, -50%); */
+    width: 100%;
+    font-size: 32px;
+    cursor: pointer;
 }

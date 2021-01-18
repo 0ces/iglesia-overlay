@@ -55,7 +55,7 @@ admin.on('connection', (socket) => {
     });
 
     socket.on('disconnect', () => {
-        console.log('User disconnected');
+        console.log('User disconnected from /admin');
     });
 
     socket.on('banner', (checked) => {
@@ -80,14 +80,35 @@ admin.on('connection', (socket) => {
     socket.on('logo-pos', selected => {
         socket.broadcast.emit('logo-pos', selected);
         viewer.emit('logo-pos', selected);
-    })
+    });
+
+    socket.on('youtube-source', (data) => {
+        viewer.emit('youtube-source', data);
+    });
+
+    socket.on('get-youtube-current-time', () => {
+        viewer.emit('get-youtube-current-time');
+    });
 })
 
 viewer.on('connection', (socket) => {
     let address = socket.handshake.address.replace('::ffff:', '');
     console.log(`Se ha conectado ${address} a /viewer`)
+
     socket.on('disconnect', () => {
-        console.log('User disconnected');
+        console.log('User disconnected from /viewer');
+    });
+
+    socket.on('youtube-state-change', () => {
+        admin.emit('youtube-state-change');
+    });
+
+    socket.on('youtube-data', (data) => {
+        admin.emit('youtube-data', data);
+    });
+
+    socket.on('youtube-current-time', (data) => {
+        admin.emit('youtube-current-time', data);
     });
 });
 

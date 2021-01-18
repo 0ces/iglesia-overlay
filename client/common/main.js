@@ -3,16 +3,22 @@ function pad (str, max) {
   return str.length < max ? pad("0" + str, max) : str;
 }
 
-function isUndefined (variable) {
+function isUndefined(variable) {
     return typeof variable === 'undefined';
 }
 
+function minutosAString(input){
+    let minutos = Math.floor(input/60);
+    let segundos = Math.floor(input%60);
+    return `${pad(minutos,1)}:${pad(segundos,2)}`
+}
+
 class Timer {
-    constructor(segundos, elemento, callback, frecuent_callback){
-        this.segundos = segundos;
-        this.elemento = elemento;
-        this.callback = callback;
-        this.frecuent_callback = frecuent_callback;
+    constructor(data){
+        this.segundos = data.segundos;
+        this.elemento = data.elemento;
+        this.callback = data.callback;
+        this.frecuent_callback = data.frecuent_callback;
         this.interval = setInterval(() => {
             if (!isUndefined(this.elemento)){
                 this.reducirElemento();
@@ -40,9 +46,7 @@ class Timer {
     }
 
     getString(){
-        let minutos = Math.floor(this.segundos/60);
-        let segundos = this.segundos%60;
-        return `${pad(minutos,1)}:${pad(segundos,2)}`
+        return minutosAString(this.segundos);
     }
 
     stop(){

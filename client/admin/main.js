@@ -45,6 +45,8 @@ function logoPosClick(selected) {
 $(document).ready(() => {
     const socket = io('/admin');
 
+    $('input[type="text"]').val('');
+
     socket.on('shower', (data) => {
         activate(data.nombre);
     });
@@ -58,6 +60,22 @@ $(document).ready(() => {
     socket.on('logo-pos', selected => {
         logoPosClick($(`.logo-pos-${selected}`))
     });
+
+    socket.on('youtube-state-change', () => {
+        console.log('Se dejó de reproducir');
+        $('.pause-btn').hide();
+        $('.play-btn').show();
+    });
+
+    socket.on('youtube-data', (data) => {
+        $('#video-duration').text(minutosAString(data.duration));
+    });
+
+    socket.on('youtube-current-time', (data) => {
+        $('#video-current-time').val((data.currentTime/data.duration)*100);
+        $('#video-current-time-label').text(minutosAString(data.currentTime));
+        $('#video-duration').text(minutosAString(data.duration));
+    })
 
     $('.activador').each((index) => {
         let selector = $($('.activador')[index]).attr('data-selector');
@@ -113,12 +131,27 @@ $(document).ready(() => {
                     break;
             }
         }, 2000);
+        switch (seleccionado) {
+            case 'inicio':
+                $('.conf-controls').show();
+                break;
+            case 'main':
+                $('.conf-controls').hide();
+                break;
+            case 'fin':
+                $('.conf-controls').show();
+                break;
+        }
     });
 
     $('#timer-empezar').click(() => {
         let minutos = $('.timer').val();
-        timer = new Timer(minutos*60,'.timer',() => {
-            $('.scene-switcher button')[1].click();
+        timer = new Timer({
+            segundos: minutos*60,
+            elemento: '.timer',
+            callback: () => {
+                $('.scene-switcher button')[1].click();
+            }
         });
         socket.emit('timer', {minutos: minutos, parar: false});
     });
@@ -133,6 +166,26 @@ $(document).ready(() => {
             $('#timer-empezar').click();
         }
     });
+
+    $('.conf-video>input').on('keypress', (e) => {
+        console.log(e);
+        if (e.which == 13){
+            let elem = $(e.target);
+            socket.emit('youtube-source', {ID: elem.attr('data-id'), YTID: elem.val()});
+        }
+    });
+
+    let durationSelected = false;
+
+    $('#video-current-time').mousedown((e) => {
+        durationSelected = true;
+    });
+
+    setInterval(() => {
+        if(!durationSelected){
+            socket.emit('get-youtube-current-time');
+        }
+    }, 1000);
 });
 
 // setInterval(() => {

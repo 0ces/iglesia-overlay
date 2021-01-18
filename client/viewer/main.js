@@ -1,3 +1,5 @@
+const socket = io('/viewer');
+
 function fadeVol(player, duration) {
     const initial_vol = player.getVolume();
     let volumen = initial_vol;
@@ -18,33 +20,42 @@ tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-var player;
-function onYouTubeIframeAPIReady() {
-    player = new YT.Player('YTPlayer', {
-        height: '1920',
-        width: '1080',
-        videoId: '',
-        events: {
-            'onReady': onPlayerReady
-        },
-        playerVars: {
-            'autoplay': 1,
-            'controls': 0,
-        }
-    });
+var players = {
+    inicio: null,
+    fin: null
+};
 
+function onYouTubeIframeAPIReady() {
+
+}
+
+function getDataFromPlayer(player) {
+    return {
+        duration: player.getDuration(),
+        volumen: player.getVolume(),
+        state: player.getPlayerState(),
+        currentTime: player.getCurrentTime()
+    }
 }
 
 function onPlayerReady(event) {
-    event.target.playVideo();
+    let player = event.target;
+    player.playVideo();
+    // player.pauseVideo();
     player.setPlaybackQuality('hd1080');
-    // player.seekTo(player.getDuration()/2, true);
+    socket.emit('youtube-data', getDataFromPlayer(player));
+}
+
+function onStateChange(event) {
+    let player = event.target;
+    if (player.getPlayerState() !== 1) {
+        socket.emit('youtube-state-change');
+    }
 }
 
 $(document).ready(() => {
-    const socket = io('/viewer');
     let timer;
-    let volumen = 100;
+    let currentPlayer;
 
     socket.on('shower', (data) => {
         $('.banner').addClass('blur-ani');
@@ -96,9 +107,13 @@ $(document).ready(() => {
             timer.stop();
         }
         if (!data.parar){
-            timer = new Timer(data.minutos*60,'.timer',() => {
-                $('.timer').text('Estamos por comenzar');
-                fadeVol(player, 5);
+            timer = new Timer({
+                segundos: data.minutos*60,
+                elemento: '.timer',
+                callback: () => {
+                    $('.timer').text('Estamos por comenzar');
+                    fadeVol(players.inicio, 10);
+                }
             });
         } else {
             timer.stop();
@@ -113,17 +128,20 @@ $(document).ready(() => {
                 $('#inicio').removeClass('hide');
                 $('#inicio').addClass('show');
                 $('#inicio video').get(0).play();
+                currentPlayer = players.inicio;
                 break;
             case 'main':
                 $('.pantalla').removeClass('show');
                 $('.pantalla').addClass('hide');
-                $('.pantalla video').each((i, e) => {
-                    e.pause()
+                $(players).each((i, e) => {
+                    e.pauseVideo()
                 });
+                currentPlayer = null;
                 break;
             case 'fin':
                 $('#fin').removeClass('hide');
                 $('#fin').addClass('show');
+                currentPlayer = players.fin;
                 break;
         }
     });
@@ -148,7 +166,31 @@ $(document).ready(() => {
             }
             $('.logos').toggleClass('hide-any show-any');
             // setTimeout(()=>{$('.logos').removeClass('show-any');},2000);
-        }, 2500);
+        }, 2100);
+    });
+
+    socket.on('youtube-source', (data) => {
+        $(`#YTPlayer-${data.ID}`).replaceWith(`<div id="YTPlayer-${data.ID}" class="full blur"></div>`);
+        players[data.ID] = new YT.Player(`YTPlayer-${data.ID}`, {
+            height: '1920',
+            width: '1080',
+            videoId: data.YTID,
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onStateChange,
+            },
+            playerVars: {
+                'autoplay': 1,
+                'controls': 0,
+            }
+        });
+        currentPlayer = players.inicio;
+    });
+
+    socket.on('get-youtube-current-time', () => {
+        console.log(currentPlayer);
+        if (currentPlayer)
+        socket.emit('youtube-current-time', getDataFromPlayer(currentPlayer));
     });
 
 });
