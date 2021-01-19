@@ -1,7 +1,5 @@
 # **OBS Overlay**
 
----
-
 ## Instalación
 Para instalarlo es tan sencillo como descargar la última versión desde [Releases](https://github.com/0ces/iglesia-overlay/releases), una vez descargado es recomendable añadir el archivo como una excepción de su antivirus, esto es porque el ejecutable no está firmado digitalmente y por defecto será bloqueado.
 
