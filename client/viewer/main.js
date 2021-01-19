@@ -1,14 +1,24 @@
 const socket = io('/viewer');
 
-function fadeVol(player, duration) {
-    const initial_vol = player.getVolume();
-    let volumen = initial_vol;
+function fadeVol(player, from, to,  duration) {
+    const initial_vol = from;
+    let volumen = from;
+    let dv;
+    let pause;
+    if (from < to){
+        dv = 1;
+        pause = false;
+    } else {
+        dv = -1;
+        pause = true;
+    }
     let interval = setInterval(() => {
-        if (volumen > -1){
+        if (volumen !== to){
             player.setVolume(volumen);
-            volumen--;
+            volumen += dv;
         }  else {
             clearInterval(interval);
+            if (pause)
             player.pauseVideo();
         }
     }, duration*1000/initial_vol);
@@ -112,7 +122,7 @@ $(document).ready(() => {
                 elemento: '.timer',
                 callback: () => {
                     $('.timer').text('Estamos por comenzar');
-                    fadeVol(players.inicio, 10);
+                    // fadeVol(players.inicio, 100, 0, 10);
                 }
             });
         } else {
@@ -123,19 +133,18 @@ $(document).ready(() => {
     socket.on('scene', (seleccionado) => {
         $('.pantalla').removeClass('show');
         $('.pantalla').addClass('hide');
+        console.log(`Cambio de escena ${seleccionado}`);
         switch (seleccionado) {
             case 'inicio':
                 $('#inicio').removeClass('hide');
                 $('#inicio').addClass('show');
-                $('#inicio video').get(0).play();
                 currentPlayer = players.inicio;
                 break;
             case 'main':
                 $('.pantalla').removeClass('show');
                 $('.pantalla').addClass('hide');
-                $(players).each((i, e) => {
-                    e.pauseVideo()
-                });
+                // players.inicio.pauseVideo();
+                // players.fin.pauseVideo();
                 currentPlayer = null;
                 break;
             case 'fin':
@@ -143,6 +152,12 @@ $(document).ready(() => {
                 $('#fin').addClass('show');
                 currentPlayer = players.fin;
                 break;
+        }
+        if (currentPlayer) {
+            fadeVol(currentPlayer, 0, 100, 5);
+        } else {
+            fadeVol(players.inicio, 100, 0, 10);
+            fadeVol(players.fin, 100, 0, 10);
         }
     });
 
@@ -185,6 +200,7 @@ $(document).ready(() => {
             }
         });
         currentPlayer = players.inicio;
+        socket.emit('youtube-state-change');
     });
 
     socket.on('get-youtube-current-time', () => {

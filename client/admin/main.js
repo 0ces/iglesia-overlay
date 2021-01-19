@@ -185,6 +185,7 @@ $(document).ready(() => {
     $('.conf-video>input').on('keypress', (e) => {
         if (e.which == 13){
             let elem = $(e.target);
+            $('.pause-btn')[0].click();
             socket.emit('youtube-source', {ID: elem.attr('data-id'), YTID: elem.val()});
         }
     });
@@ -193,6 +194,10 @@ $(document).ready(() => {
 
     $('#video-current-time').mousedown((e) => {
         durationSelected = true;
+    });
+
+    $('#video-current-time').mouseup((e) => {
+        durationSelected = false;
     });
 
     setInterval(() => {
