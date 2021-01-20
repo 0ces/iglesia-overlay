@@ -9,16 +9,16 @@ const io = require('socket.io')(server1);
 const admin = io.of('/admin');
 const viewer = io.of('/viewer');
 
-const server2 = http.createServer((req, res) => {
-    let stream = fs.createReadStream(path.join('.', req.url));
-    stream.on('error', function() {
-        res.writeHead(404);
-        res.end();
-    });
-    stream.pipe(res);
-}).listen(3001, () => {
-    console.log('Listening for files requests on *:3001');
-});
+// const server2 = http.createServer((req, res) => {
+//     let stream = fs.createReadStream(path.join('.', req.url));
+//     stream.on('error', function() {
+//         res.writeHead(404);
+//         res.end();
+//     });
+//     stream.pipe(res);
+// }).listen(3001, () => {
+//     console.log('Listening for files requests on *:3001');
+// });
 
 // let db = new sqlite3.Database('./db/database.db', sqlite3.OPEN_CREATE, (err) => {
 //   if (err) {
