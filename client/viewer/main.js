@@ -68,6 +68,7 @@ function onStateChange(event) {
 $(document).ready(() => {
     let timer;
     let currentPlayer;
+    let currentScene = 'inicio';
 
     socket.on('shower', (data) => {
         $('.banner').addClass('blur-ani');
@@ -113,16 +114,25 @@ $(document).ready(() => {
     });
 
     socket.on('timer', (data) => {
-        if (typeof timer !== 'undefined'){
-            timer.stop();
-        }
         if (!data.parar){
             timer = new Timer({
                 segundos: data.minutos*60,
                 elemento: '.timer',
                 callback: () => {
-                    $('.timer').text('Estamos por comenzar');
-                    // fadeVol(players.inicio, 100, 0, 10);
+                    console.log(currentScene);
+                    if (currentScene === 'inicio'){
+                        $('.timer').text('Estamos por comenzar');
+                    }
+                    if (currentScene === 'fin'){
+                        if (currentPlayer)
+                        fadeVol(currentPlayer, 100, 0, 10);
+                        $('#fin').removeClass('show');
+                        $('#fin').addClass('hide');
+                        $('.logos').removeClass('center scale');
+                        $('.logos').addClass('center scale');
+                        $('#fin-bg').removeClass('hide');
+                        $('#fin-bg').addClass('show');
+                    }
                 }
             });
         } else {
@@ -134,6 +144,10 @@ $(document).ready(() => {
         $('.pantalla').removeClass('show');
         $('.pantalla').addClass('hide');
         console.log(`Cambio de escena ${seleccionado}`);
+        $('.logos').removeClass('scale center');
+        $('#fin-bg').removeClass('show');
+        $('#fin-bg').addClass('hide');
+        currentScene = seleccionado;
         switch (seleccionado) {
             case 'inicio':
                 $('#inicio').removeClass('hide');
@@ -148,15 +162,20 @@ $(document).ready(() => {
                 currentPlayer = null;
                 break;
             case 'fin':
+                currentPlayer = players.fin;
+                if (currentPlayer)
+                currentPlayer.playVideo();
                 $('#fin').removeClass('hide');
                 $('#fin').addClass('show');
-                currentPlayer = players.fin;
                 break;
         }
         if (currentPlayer) {
+            currentPlayer.seekTo(0, true);
             fadeVol(currentPlayer, 0, 100, 5);
         } else {
+            if (players.inicio)
             fadeVol(players.inicio, 100, 0, 10);
+            if (players.fin)
             fadeVol(players.fin, 100, 0, 10);
         }
     });
@@ -164,7 +183,7 @@ $(document).ready(() => {
     socket.on('logo-pos', selected => {
         $('.logos').toggleClass('hide-any show-any');
         setTimeout(() => {
-            $('.logos').removeClass('top bottom left right');
+            $('.logos').removeClass('top bottom left right center');
             switch (selected) {
                 case 1:
                     $('.logos').addClass('top left');

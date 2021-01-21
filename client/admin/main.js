@@ -165,7 +165,14 @@ $(document).ready(() => {
             segundos: minutos*60,
             elemento: '.timer',
             callback: () => {
-                $('.scene-switcher button')[1].click();
+                let selected = $($('.scene-switcher button.checked').get(0)).val();
+                console.log(`Está selecionado ${selected}`);
+                if (selected === 'inicio'){
+                    $('.scene-switcher button')[1].click();
+                }
+                if (selected === 'fin'){
+                    // $('.scene-switcher button')[2].click();
+                }
             }
         });
         socket.emit('timer', {minutos: minutos, parar: false});
