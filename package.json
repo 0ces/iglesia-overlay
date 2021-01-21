@@ -1,6 +1,6 @@
 {
   "name": "iglesia-overlay",
-  "version": "1.5.5",
+  "version": "1.5.6",
   "description": "OBS web powered overlay",
   "main": "main.js",
   "bin": "main.js",
