@@ -97,6 +97,11 @@ admin.on('connection', (socket) => {
     socket.on('youtube-pause', () => {
         viewer.emit('youtube-pause');
     });
+
+    socket.on('youtube-seek', (percentage) => {
+        socket.broadcast.emit('youtube-seek', percentage);
+        viewer.emit('youtube-seek', percentage);
+    });
 })
 
 viewer.on('connection', (socket) => {

@@ -235,6 +235,11 @@ $(document).ready(() => {
         currentPlayer.pauseVideo();
     });
 
+    socket.on('youtube-seek', (percentage) => {
+        console.log(currentPlayer.getDuration()*percentage);
+        currentPlayer.seekTo(currentPlayer.getDuration()*percentage, true);
+    });
+
 });
 
 

@@ -79,7 +79,11 @@ $(document).ready(() => {
         $('#video-current-time').val((data.currentTime/data.duration)*100);
         $('#video-current-time-label').text(minutosAString(data.currentTime));
         $('#video-duration').text(minutosAString(data.duration));
-    })
+    });
+
+    socket.on('youtube-seek', (percentage) => {
+        $('#video-current-time').val(percentage);
+    });
 
     $('.play-btn').click(() => {
         socket.emit('youtube-play');
@@ -204,6 +208,8 @@ $(document).ready(() => {
     });
 
     $('#video-current-time').mouseup((e) => {
+        socket.emit('youtube-seek', $('#video-current-time').val()/100);
+        console.log($('#video-current-time').val()/100);
         durationSelected = false;
     });
 
