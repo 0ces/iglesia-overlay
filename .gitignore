@@ -116,3 +116,4 @@ dist
 .pnp.*
 *.exe
 *.mp4
+test.js

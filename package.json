@@ -31,6 +31,7 @@
   "homepage": "https://github.com/0ces/iglesia-overlay#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "github-trees": "^0.2.0",
     "socket.io": "^3.0.5",
     "socket.io-client": "^3.0.5"
   },
