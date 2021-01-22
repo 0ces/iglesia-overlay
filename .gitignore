@@ -117,3 +117,5 @@ dist
 *.exe
 *.mp4
 test.js
+
+build/*
