@@ -125,13 +125,13 @@ $(document).ready(() => {
                     }
                     if (currentScene === 'fin'){
                         if (currentPlayer)
+                        $('#fin-bg').removeClass('hide');
+                        $('#fin-bg').addClass('show');
                         fadeVol(currentPlayer, 100, 0, 10);
                         $('#fin').removeClass('show');
                         $('#fin').addClass('hide');
                         $('.logos').removeClass('center scale');
                         $('.logos').addClass('center scale');
-                        $('#fin-bg').removeClass('hide');
-                        $('#fin-bg').addClass('show');
                     }
                 }
             });
@@ -204,6 +204,7 @@ $(document).ready(() => {
     });
 
     socket.on('youtube-source', (data) => {
+        $(`#${data.ID} video`).get(0).pause();
         $(`#YTPlayer-${data.ID}`).replaceWith(`<div id="YTPlayer-${data.ID}" class="full blur"></div>`);
         players[data.ID] = new YT.Player(`YTPlayer-${data.ID}`, {
             height: '1920',
