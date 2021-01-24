@@ -121,7 +121,7 @@ $(document).ready(() => {
                 callback: () => {
                     console.log(currentScene);
                     if (currentScene === 'inicio'){
-                        $('.timer').text('Estamos por comenzar');
+                        // $('.timer').text('Estamos por comenzar');
                     }
                     if (currentScene === 'fin'){
                         if (currentPlayer)

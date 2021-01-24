@@ -51,7 +51,7 @@ class Timer {
 
     stop(){
         clearInterval(this.interval);
-        $(this.elemento).text('');
+        $(this.elemento).text('Estamos por comenzar');
         $(this.elemento).val('');
     }
 }
