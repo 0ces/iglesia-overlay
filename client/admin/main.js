@@ -33,6 +33,7 @@ function logoPosClick(selected) {
 
 $(document).ready(() => {
     const socket = io('/admin');
+    let video_duration;
 
     $('input[type="text"]').val('');
 
@@ -67,7 +68,9 @@ $(document).ready(() => {
     socket.on('youtube-current-time', (data) => {
         $('#video-current-time').val((data.currentTime/data.duration)*100);
         $('#video-current-time-label').text(minutosAString(data.currentTime));
+        $('#video-time-left').text(minutosAString(data.duration-data.currentTime));
         $('#video-duration').text(minutosAString(data.duration));
+        video_duration = data.duration;
     });
 
     socket.on('youtube-seek', (percentage) => {
@@ -196,9 +199,16 @@ $(document).ready(() => {
         durationSelected = true;
     });
 
+    $('#video-current-time').on('input', (e) => {
+        // console.log(video_duration, $('#video-current-time').val()/100, ($('#video-current-time').val()/100)*video_duration)
+        if(video_duration){
+            $('#video-current-time-label').text(minutosAString(($('#video-current-time').val()/100)*video_duration));
+        }
+    })
+
     $('#video-current-time').mouseup((e) => {
         socket.emit('youtube-seek', $('#video-current-time').val()/100);
-        console.log($('#video-current-time').val()/100);
+        // console.log($('#video-current-time').val()/100);
         durationSelected = false;
     });
 
