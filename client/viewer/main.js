@@ -124,9 +124,9 @@ $(document).ready(() => {
                         // $('.timer').text('Estamos por comenzar');
                     }
                     if (currentScene === 'fin'){
-                        if (currentPlayer)
                         $('#fin-bg').removeClass('hide');
                         $('#fin-bg').addClass('show');
+                        if (currentPlayer)
                         fadeVol(currentPlayer, 100, 0, 10);
                         $('#fin').removeClass('show');
                         $('#fin').addClass('hide');
