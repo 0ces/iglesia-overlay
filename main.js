@@ -12,19 +12,12 @@ const https = require('https');
 const tree = require('github-trees');
 const get = require('get-file');
 
-// const server2 = http.createServer((req, res) => {
-//     let stream = fs.createReadStream(path.join('.', req.url));
-//     stream.on('error', function() {
-//         res.writeHead(404);
-//         res.end();
-//     });
-//     stream.pipe(res);
-// }).listen(3001, () => {
-//     console.log('Listening for files requests on *:3001');
-// });
+let middleware = require('socketio-wildcard')();
+
+admin.use(middleware);
+viewer.use(middleware);
 
 function downloadFile(repo, path) {
-    // console.log(`${repo}/${path}`);
     get(repo, path, (error, response) => {
         if (error) return console.error(error);
         let file = fs.createWriteStream(path);
@@ -78,59 +71,16 @@ function main() {
         let address = socket.handshake.address.replace('::ffff:', '');
         console.log(`Se ha conectado ${address} a /admin`)
 
-        socket.on('shower', (data) => {
-            socket.broadcast.emit('shower', data);
-            viewer.emit('shower', data);
+        socket.on('*', (packet) => {
+            // console.log(packet);
+            socket.broadcast.emit(packet.data[0], packet.data[1]);
+            viewer.emit(packet.data[0], packet.data[1]);
         });
 
         socket.on('disconnect', () => {
             console.log('User disconnected from /admin');
         });
 
-        socket.on('banner', (checked) => {
-            socket.broadcast.emit('banner', checked);
-            viewer.emit('banner', checked);
-        });
-
-        socket.on('changer', (data) =>  {
-            socket.broadcast.emit('changer', data);
-            viewer.emit('changer', data);
-        });
-
-        socket.on('scene', seleccionado => {
-            socket.broadcast.emit('scene', seleccionado);
-            viewer.emit('scene', seleccionado);
-        });
-
-        socket.on('timer', (data) => {
-            viewer.emit('timer', data);
-        });
-
-        socket.on('logo-pos', selected => {
-            socket.broadcast.emit('logo-pos', selected);
-            viewer.emit('logo-pos', selected);
-        });
-
-        socket.on('youtube-source', (data) => {
-            viewer.emit('youtube-source', data);
-        });
-
-        socket.on('get-youtube-current-time', () => {
-            viewer.emit('get-youtube-current-time');
-        });
-
-        socket.on('youtube-play', () => {
-            viewer.emit('youtube-play');
-        });
-
-        socket.on('youtube-pause', () => {
-            viewer.emit('youtube-pause');
-        });
-
-        socket.on('youtube-seek', (percentage) => {
-            socket.broadcast.emit('youtube-seek', percentage);
-            viewer.emit('youtube-seek', percentage);
-        });
     })
 
     viewer.on('connection', (socket) => {
@@ -141,20 +91,9 @@ function main() {
             console.log('User disconnected from /viewer');
         });
 
-        socket.on('youtube-state-change', () => {
-            admin.emit('youtube-state-change');
-        });
-
-        socket.on('youtube-data', (data) => {
-            admin.emit('youtube-data', data);
-        });
-
-        socket.on('youtube-current-time', (data) => {
-            admin.emit('youtube-current-time', data);
-        });
-
-        socket.on('youtube-playing', () => {
-            admin.emit('youtube-playing');
+        socket.on('*', (packet) => {
+            socket.broadcast.emit(packet.data[0], packet.data[1]);
+            admin.emit(packet.data[0], packet.data[1]);
         });
     });
 
