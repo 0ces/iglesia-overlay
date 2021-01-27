@@ -130,28 +130,16 @@ $(document).ready(() => {
         }
         socket.emit('scene', seleccionado);
         setTimeout(() => {
-            switch (seleccionado) {
-                case 'inicio':
-                    $('.banner-switch button')[1].click();
-                    break;
-                case 'main':
-                    $('.banner-switch button')[0].click();
-                    break;
-                case 'fin':
-                    $('.banner-switch button')[1].click();
-                    break;
+            if (['inicio', 'fin', 'transicion'].indexOf(seleccionado) >= 0){
+                $('.banner-switch button')[1].click();
+            } else {
+                // $('.banner-switch button')[0].click();
             }
         }, 2000);
-        switch (seleccionado) {
-            case 'inicio':
-                $('.conf-controls').show();
-                break;
-            case 'main':
-                $('.conf-controls').hide();
-                break;
-            case 'fin':
-                $('.conf-controls').show();
-                break;
+        if (['inicio', 'fin'].indexOf(seleccionado) >= 0){
+            $('.conf-controls').show();
+        } else {
+            $('.conf-controls').hide();
         }
     });
 
@@ -167,7 +155,7 @@ $(document).ready(() => {
                     $('.scene-switcher button')[1].click();
                 }
                 if (selected === 'fin'){
-                    // $('.scene-switcher button')[2].click();
+                    $('.scene-switcher button')[3].click();
                 }
             }
         });

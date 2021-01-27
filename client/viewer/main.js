@@ -90,7 +90,7 @@ $(document).ready(() => {
             $('.banner').removeClass('show');
             $('.banner').addClass('hide');
             $('.logos').removeClass('hide-any');
-            setTimeout(()=>{$('.logos').addClass('show-any')}, 5000);
+            $('.logos').addClass('show-any')
         }
         if (checked === 'banner' && $('.banner').hasClass('hide')){
             $('.banner').removeClass('hide');
@@ -124,14 +124,10 @@ $(document).ready(() => {
                         // $('.timer').text('Estamos por comenzar');
                     }
                     if (currentScene === 'fin'){
-                        $('#fin-bg').removeClass('hide');
-                        $('#fin-bg').addClass('show');
                         if (currentPlayer)
                         fadeVol(currentPlayer, 100, 0, 10);
                         $('#fin').removeClass('show');
                         $('#fin').addClass('hide');
-                        $('.logos').removeClass('center scale');
-                        $('.logos').addClass('center scale');
                     }
                 }
             });
@@ -141,34 +137,50 @@ $(document).ready(() => {
     });
 
     socket.on('scene', (seleccionado) => {
-        $('.pantalla').removeClass('show');
-        $('.pantalla').addClass('hide');
+        $('.escena').removeClass('show');
+        $('.escena').addClass('hide');
         console.log(`Cambio de escena ${seleccionado}`);
         $('.logos').removeClass('scale center');
-        $('#fin-bg').removeClass('show');
-        $('#fin-bg').addClass('hide');
+        // $('#transicion').removeClass('show');
+        // $('#transicion').addClass('hide');
         currentScene = seleccionado;
-        switch (seleccionado) {
-            case 'inicio':
-                $('#inicio').removeClass('hide');
-                $('#inicio').addClass('show');
-                currentPlayer = players.inicio;
-                break;
-            case 'main':
-                $('.pantalla').removeClass('show');
-                $('.pantalla').addClass('hide');
-                // players.inicio.pauseVideo();
-                // players.fin.pauseVideo();
-                currentPlayer = null;
-                break;
-            case 'fin':
-                currentPlayer = players.fin;
-                if (currentPlayer)
-                currentPlayer.playVideo();
-                $('#fin').removeClass('hide');
-                $('#fin').addClass('show');
-                break;
+        console.log($('#black'), seleccionado);
+        if (seleccionado === 'inicio'){
+            $('#black').removeClass('hide-any');
+            $('#black').addClass('show-any');
+            $('#inicio').removeClass('hide');
+            $('#inicio').addClass('show');
+            currentPlayer = players.inicio;
         }
+
+        if (seleccionado === 'main'){
+            $('#black').removeClass('show-any');
+            $('#black').addClass('hide-any');
+            $('.escena').removeClass('show');
+            $('.escena').addClass('hide');
+            currentPlayer = null;
+        }
+
+        if (seleccionado === 'fin'){
+            $('#black').removeClass('hide-any');
+            $('#black').addClass('show-any');
+            currentPlayer = players.fin;
+            if (currentPlayer){
+                currentPlayer.playVideo();
+            }
+            $('#fin').removeClass('hide');
+            $('#fin').addClass('show');
+        }
+
+        if (seleccionado === 'transicion'){
+            $('#black').removeClass('hide-any');
+            $('#black').addClass('show-any');
+            $('#transicion').removeClass('hide');
+            $('#transicion').addClass('show');
+            $('.logos').removeClass('center scale');
+            $('.logos').addClass('center scale');
+        }
+
         if (currentPlayer) {
             currentPlayer.seekTo(0, true);
             fadeVol(currentPlayer, 0, 100, 5);

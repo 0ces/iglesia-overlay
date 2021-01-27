@@ -510,14 +510,14 @@ img {
     100%{background-position:0% 50%}
 }
 
-#fin-bg {
+#transicion {
     background: rgba(0, 0, 0, 0) linear-gradient(230deg, rgb(75, 207, 147), rgb(75, 121, 207), rgb(162, 75, 207)) repeat scroll 0% 0% / 200% 200%;
 }
 
-.show#fin-bg {
+.show#transicion {
     animation: bg-ani 10s ease infinite, fade-in 2s forwards;
 }
 
-.hide#fin-bg {
+.hide#transicion {
     animation: fade-out 2s forwards;
 }

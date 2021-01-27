@@ -72,7 +72,7 @@ function main() {
         console.log(`Se ha conectado ${address} a /admin`)
 
         socket.on('*', (packet) => {
-            // console.log(packet);
+            console.log(packet);
             socket.broadcast.emit(packet.data[0], packet.data[1]);
             viewer.emit(packet.data[0], packet.data[1]);
         });
