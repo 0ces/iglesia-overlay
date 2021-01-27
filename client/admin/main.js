@@ -13,9 +13,9 @@
 // }
 
 function activate(selector){
-    $(`#btn-${selector}`).prop('disabled', true);
+    $('.activador').prop('disabled', true);
     setTimeout(() => {
-        $(`#btn-${selector}`).prop('disabled', false);
+        $('.activador').prop('disabled', false);
     }, 10000);
 }
 
