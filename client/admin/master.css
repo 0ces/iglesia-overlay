@@ -37,6 +37,10 @@ table {
     border-color: #0d6efd;
 }
 
+.changer {
+    width: 130px;
+}
+
 .btn-facebook:hover {
     background: #365696;
     color: #fff;
