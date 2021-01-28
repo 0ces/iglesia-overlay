@@ -75,10 +75,10 @@ $(document).ready(() => {
         $(`.${data.nombre}`).toggleClass('hide show');
         setTimeout(() => {
             $(`.${data.nombre}`).toggleClass('hide show');
-        }, 5000);
+        }, 10000);
         setTimeout(() => {
             $('.banner').removeClass('blur-ani');
-        }, 10000);
+        }, 15000);
     });
 
     // setTimeout(() => {
