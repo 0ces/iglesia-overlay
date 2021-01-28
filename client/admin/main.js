@@ -16,7 +16,7 @@ function activate(selector){
     $('.activador').prop('disabled', true);
     setTimeout(() => {
         $('.activador').prop('disabled', false);
-    }, 10000);
+    }, 12000);
 }
 
 function logoPosClick(selected) {
