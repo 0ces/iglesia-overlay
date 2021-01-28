@@ -144,7 +144,7 @@ $(document).ready(() => {
     });
 
     $('#timer-empezar').click(() => {
-        let minutos = $('.timer').val();
+        let minutos = parseTime($('.timer').val());
         timer = new Timer({
             segundos: minutos*60,
             elemento: '.timer',

@@ -13,6 +13,17 @@ function minutosAString(input){
     return `${pad(minutos,1)}:${pad(segundos,2)}`
 }
 
+function parseTime(str){
+    let minutes;
+    if (str.includes(':')){
+        let temp = str.split(':');
+        minutes = parseInt(temp[0]) + (parseInt(temp[1])/60);
+    } else {
+        minutes = parseInt(str);
+    }
+    return minutes;
+}
+
 class Timer {
     constructor(data){
         this.segundos = data.segundos;
