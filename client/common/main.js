@@ -43,8 +43,10 @@ class Timer {
     }
 
     reducirElemento(){
+        $(this.elemento).prop('disabled', false);
         $(this.elemento).text(this.getString());
         $(this.elemento).val(this.getString());
+        $(this.elemento).prop('disabled', true);
         this.reducir();
     }
 
