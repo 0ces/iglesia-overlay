@@ -78,7 +78,7 @@ $(document).ready(() => {
         }, 8000);
         setTimeout(() => {
             $('.banner').removeClass('blur-ani');
-        }, 10000);
+        }, 14000);
     });
 
     // setTimeout(() => {
