@@ -109,6 +109,9 @@ $(document).ready(() => {
         $(`.${data.nombre}`).removeClass('disable');
         // $('.contacto-container').addClass('disable');
         currentLogo = data.nombre;
+        $('.titulo div').addClass('disable');
+        $(`.${currentLogo}`).removeClass('disable');
+        $(`.${currentLogo}`).addClass('show-any');
         switch (data.nombre) {
             case 'live-online':
                 $('.contacto-container').removeClass('disable');
