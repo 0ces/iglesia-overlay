@@ -5,6 +5,11 @@
 }
 
 @font-face {
+    font-family: 'Earworm';
+    src: url('../static/Earworm.woff');
+}
+
+@font-face {
     font-family: 'StayGirly';
     src: url('../static/Stay-Girly.woff');
 }
@@ -79,12 +84,13 @@ img {
     font-size: 85px;
 }
 
-.show.shower {
-    animation: fade-in 2s forwards;
+.exploradores {
+    font-family: 'Earworm';
+    font-size: 70px;
 }
 
-.disable {
-    display: none;
+.show.shower {
+    animation: fade-in 2s forwards;
 }
 
 .show .letrero {
@@ -309,6 +315,7 @@ img {
     text-shadow: 5px 5px 10px rgba(0,0,0,.8);
     letter-spacing: 3px;
     padding-left: 180px;
+    white-space: nowrap;
 }
 
 .encabezado {
@@ -525,4 +532,36 @@ img {
 
 .hide#transicion {
     animation: fade-out 2s forwards;
+}
+
+.tema {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+    width: 80%;
+}
+
+.tema span {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Bebas Neue';
+    text-shadow: 5px 5px 10px rgba(0,0,0,.8);
+    text-align: center;
+    font-size: 100px;
+    padding: 0;
+    margin-left: 180px;
+    white-space: normal !important;
+}
+
+.show-any span {
+    opacity: 0;
+    animation: fade-in 2s forwards !important;
+}
+
+.disable {
+    display: none;
 }

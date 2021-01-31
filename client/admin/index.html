@@ -86,10 +86,26 @@
                 </tr>
                 <tr>
                     <td colspan="3">
-                        <div class="banner-switch btn-group" role="group">
+                        <div class="switch btn-group" role="group">
                             <button type="button" class="btn btn-outline-primary" id="banner-switch" value="banner">Banner</button>
                             <button type="button" class="btn btn-outline-primary checked" id="logo-switch" value="logo">Logo</button>
                         </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <div class="tema-switcher btn-group" role="group" style="display:none;">
+                            <button type="button" class="btn btn-outline-primary checked" id="banner-switch" value="banner">Banner</button>
+                            <button type="button" class="btn btn-outline-primary" id="tema-switch" value="tema">Tema</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="tema-fila" style="display:none;">
+                    <td colspan="2">
+                        <input type="text" class="form-control" placeholder="Tema" id="tema-input">
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-outline-primary" name="button" id="tema-aplicar">Aplicar</button>
                     </td>
                 </tr>
                 <tr>
@@ -102,14 +118,6 @@
                         </div>
                     </td>
                 </tr>
-                <!-- <tr>
-                    <td colspan="2">
-                        <input type="text" class="form-control" placeholder="Tema">
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-outline-primary" name="button">Aplicar</button>
-                    </td>
-                </tr> -->
                 <tr>
                     <td colspan="3">Temporizador</td>
                 </tr>

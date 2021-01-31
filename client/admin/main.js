@@ -43,7 +43,7 @@ $(document).ready(() => {
 
     socket.on('banner', (checked) => {
         if (!$(`#${checked}-switch`).hasClass('checked')){
-            $('.banner-switch button').toggleClass('checked');
+            $('.switch button').toggleClass('checked');
         }
     });
 
@@ -96,17 +96,44 @@ $(document).ready(() => {
         activate(selector);
     });
 
-    $('.banner-switch button').click((e) => {
+    $('.switch button').click((e) => {
         if (!$(e.target).hasClass('checked')){
-            $('.banner-switch button').toggleClass('checked');
+            $('.switch button').toggleClass('checked');
         }
         let selected = $(e.target).attr('value');
         if (selected === 'logo'){
+            $('.tema-switcher').hide();
             $('.logo-pos').show();
         } else {
+            $('.tema-switcher').show();
             $('.logo-pos').hide();
         }
         socket.emit('banner', selected);
+    });
+
+    $('.tema-switcher button').click((e) => {
+        if (!$(e.target).hasClass('checked')){
+            $('.tema-switcher button').toggleClass('checked');
+        }
+        let selected = $(e.target).attr('value');
+        if (selected === 'tema'){
+
+            $('.tema-fila').show();
+        } else {
+            $('.tema-fila').hide();
+        }
+        socket.emit('tema-switcher', {isTema: selected === 'tema'});
+    });
+
+    $('#tema-aplicar').click((e) => {
+        let tema = $('#tema-input').val();
+        socket.emit('tema', {tema: tema});
+    });
+
+    $('#tema-input').on('keypress', (e) => {
+        if(e.which == 13){
+            $('#tema-aplicar').click();
+        }
     });
 
     $('.logo-pos div').click((e) => {
@@ -131,7 +158,7 @@ $(document).ready(() => {
         socket.emit('scene', seleccionado);
         setTimeout(() => {
             if (['inicio', 'fin', 'transicion'].indexOf(seleccionado) >= 0){
-                $('.banner-switch button')[1].click();
+                $('.switch button')[1].click();
             } else {
                 // $('.banner-switch button')[0].click();
             }

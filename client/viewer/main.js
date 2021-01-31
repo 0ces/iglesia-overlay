@@ -69,6 +69,7 @@ $(document).ready(() => {
     let timer;
     let currentPlayer;
     let currentScene = 'inicio';
+    let currentLogo = 'live-online';
 
     socket.on('shower', (data) => {
         $('.banner').addClass('blur-ani');
@@ -89,8 +90,9 @@ $(document).ready(() => {
         if (checked === 'logo' && $('.banner').hasClass('show')){
             $('.banner').removeClass('show');
             $('.banner').addClass('hide');
+            $('.titulo div').removeClass('show-any');
             $('.logos').removeClass('hide-any');
-            $('.logos').addClass('show-any')
+            $('.logos').addClass('show-any');
         }
         if (checked === 'banner' && $('.banner').hasClass('hide')){
             $('.banner').removeClass('hide');
@@ -106,6 +108,7 @@ $(document).ready(() => {
         $('.titulo div').addClass('disable');
         $(`.${data.nombre}`).removeClass('disable');
         // $('.contacto-container').addClass('disable');
+        currentLogo = data.nombre;
         switch (data.nombre) {
             case 'live-online':
                 $('.contacto-container').removeClass('disable');
@@ -253,6 +256,31 @@ $(document).ready(() => {
         currentPlayer.seekTo(currentPlayer.getDuration()*percentage, true);
     });
 
+    socket.on('tema-switcher', (data) => {
+        if(data.isTema && $('.titulo .tema span').text() !== ''){
+            $('.titulo div').addClass('disable');
+            $('.titulo .tema').addClass('show-any');
+            $('.titulo .tema').removeClass('disable');
+        }
+        if (!data.isTema) {
+            $('.titulo div').addClass('disable');
+            $(`.${currentLogo}`).removeClass('disable');
+            $(`.${currentLogo}`).addClass('show-any');
+            // $('.contacto,.encabezado').show();
+            // setTimeout(()=>{$(`.${currentLogo}`).removeClass('show-any');},2000);
+        }
+    });
+
+    socket.on('tema', (data) => {
+        $('.titulo div').addClass('disable');
+        $('.titulo .tema span').css('font-size', '100px');
+        $('.titulo .tema span').text(`“${data.tema}”`);
+        $('.titulo .tema').addClass('show-any');
+        // $('.contacto,.encabezado').hide();
+        // setTimeout(()=>{$('.titulo .tema').removeClass('show-any');},2000);
+        $('.titulo .tema').removeClass('disable');
+        autoSizeText();
+    });
 });
 
 
