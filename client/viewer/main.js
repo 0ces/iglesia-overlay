@@ -284,6 +284,10 @@ $(document).ready(() => {
         $('.titulo .tema').removeClass('disable');
         autoSizeText();
     });
+
+    socket.on('contacto', (data) => {
+        $('.contacto span').text(data.valor);
+    });
 });
 
 

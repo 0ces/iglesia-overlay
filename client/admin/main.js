@@ -227,6 +227,16 @@ $(document).ready(() => {
         durationSelected = false;
     });
 
+    $('#contacto').on('keypress', (e) => {
+        let value = $('#contacto').val();
+        if (e.which == 13){
+            if (value === ''){
+                value = 'Linea de oración +57 315 504 5131';
+            }
+            socket.emit('contacto', {valor: value});
+        }
+    });
+
     setInterval(() => {
         if(!durationSelected){
             socket.emit('get-youtube-current-time');
