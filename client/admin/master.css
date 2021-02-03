@@ -93,6 +93,11 @@ td {
     width: 40vw;
 }
 
+.inline {
+    display: inline-flex;
+}
+
+
 .conf {
 
 }

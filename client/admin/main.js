@@ -227,13 +227,22 @@ $(document).ready(() => {
         durationSelected = false;
     });
 
-    $('#contacto').on('keypress', (e) => {
+    $('#contacto-aplicar').click((e) => {
         let value = $('#contacto').val();
+        if (value === ''){
+            value = 'Linea de oración +57 315 504 5131';
+        }
+        socket.emit('contacto', {valor: value});
+    });
+
+    $('#contacto-limpiar').click((e) => {
+        $('#contacto').val('');
+        $('#contacto-aplicar').click();
+    });
+
+    $('#contacto').on('keypress', (e) => {
         if (e.which == 13){
-            if (value === ''){
-                value = 'Linea de oración +57 315 504 5131';
-            }
-            socket.emit('contacto', {valor: value});
+            $('#contacto-aplicar').click();
         }
     });
 
