@@ -217,7 +217,7 @@ img {
     /* filter: drop-shadow(-1px 6px 3px rgba(0, 0, 0, 0.5)); */
     position: absolute;
     bottom: 20px;
-    transform: translate(-50%, 0%) scale(0.8);
+    transform: translate(-50%, 10%) scale(0.8);
     left: 50vw;
     width: 1200px;
     height: 300px;
