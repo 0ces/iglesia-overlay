@@ -34,11 +34,14 @@ function logoPosClick(selected) {
 $(document).ready(() => {
     const socket = io('/admin');
     let video_duration;
+    let timePassed = 0;
+    let timeBtw = 1000*60*20;
 
     $('input[type="text"]').val('');
 
     socket.on('shower', (data) => {
         activate(data.nombre);
+        timePassed = 0;
     });
 
     socket.on('banner', (checked) => {
@@ -94,6 +97,7 @@ $(document).ready(() => {
         let selector = $(e.target).attr('data-selector');
         socket.emit('shower', {nombre: selector});
         activate(selector);
+        timePassed = 0;
     });
 
     $('.switch button').click((e) => {
@@ -249,9 +253,6 @@ $(document).ready(() => {
     $('#tema-limpiar').click((e) => {
         $('.tema-switcher button').get(0).click();
     });
-
-    let timePassed = 0;
-    let timeBtw = 1000*60*20;
 
     setInterval(() => {
         $('#time-activadores').text(`Tiempo restante para activadores automaticos: ${minutosAString((timeBtw-timePassed)/(1000))}`);
