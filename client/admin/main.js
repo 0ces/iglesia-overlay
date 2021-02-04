@@ -250,6 +250,22 @@ $(document).ready(() => {
         $('.tema-switcher button').get(0).click();
     });
 
+    let timePassed = 0;
+    let timeBtw = 1000*60*20;
+
+    setInterval(() => {
+        $('#time-activadores').text(`Tiempo restante para activadores automaticos: ${minutosAString((timeBtw-timePassed)/(1000))}`);
+        if(timePassed === timeBtw){
+            console.log('Activadores!')
+            setTimeout(() => {
+                $('#btn-youtube').click();
+            }, 1000*15);
+            $('#btn-facebook').click();
+            timePassed = -30*1000;
+        }
+        timePassed += 1000;
+    }, 1000)
+
     setInterval(() => {
         if(!durationSelected){
             socket.emit('get-youtube-current-time');
