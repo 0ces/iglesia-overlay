@@ -211,6 +211,7 @@ img {
     left: 50px;
     height: 200px;
     width: 800px;
+    transform: scale(0.8) translate(-10%, 10%);
 }
 
 .banner {
