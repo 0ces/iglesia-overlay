@@ -246,6 +246,10 @@ $(document).ready(() => {
         }
     });
 
+    $('#tema-limpiar').click((e) => {
+        $('.tema-switcher button').get(0).click();
+    });
+
     setInterval(() => {
         if(!durationSelected){
             socket.emit('get-youtube-current-time');
