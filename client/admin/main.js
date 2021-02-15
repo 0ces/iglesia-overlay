@@ -255,7 +255,7 @@ $(document).ready(() => {
     });
 
     setInterval(() => {
-        $('#time-activadores').text(`Tiempo restante para activadores automaticos: ${minutosAString((timeBtw-timePassed)/(1000))}`);
+        $('#time-activadores').text(`${minutosAString((timeBtw-timePassed)/(1000))}`);
         if(timePassed === timeBtw){
             console.log('Activadores!')
             setTimeout(() => {

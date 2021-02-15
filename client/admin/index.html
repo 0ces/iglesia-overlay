@@ -16,161 +16,130 @@
         <script src="./main.js" charset="utf-8"></script>
     </head>
     <body>
-        <table>
-            <tbody>
-                <tr>
-                    <th colspan="3">Configuración</th>
-                </tr>
-                <tr>
-                    <td colspan="3">Logos</td>
-                </tr>
-                <tr>
-                    <td colspan="3">
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-outline-primary changer changer-active" logo-name="logoCaldas-512.png" nombre="live-online">Caldas</button>
-                            <button type="button" class="btn btn-outline-primary changer" logo-name="logoJovenes-512.png" nombre="jovenes">Jovenes</button>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-outline-primary changer" logo-name="logoExploradores-512.png" nombre="exploradores">Exploradores</button>
-                            <button type="button" class="btn btn-outline-primary changer" logo-name="ASolasConEl-512.png" nombre="ASolasConEl">A solas con Él</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="3">Escenas</td>
-                </tr>
-                <tr>
-                    <td colspan="3">
-                        <div class="btn-group scene-switcher" role="group">
-                            <button type="button" class="btn btn-outline-primary checked" value="inicio">Inicio</button>
-                            <button type="button" class="btn btn-outline-primary" value="main">Main</button>
-                            <button type="button" class="btn btn-outline-primary" value="fin">Fin</button>
-                            <button type="button" class="btn btn-outline-primary" value="transicion">Transición</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="3">
-                        <div class="border border-primary rounded conf" id="conf-videos">
-                            Videos
-                            <div class="conf-video">
-                                <label for="">YouTubeID Inicio</label>
-                                <input type="text" class="form-control" placeholder="YouTubeID Inicio" id="conf-video-inicio" data-id="inicio">
-                            </div>
-                            <div class="conf-video">
-                                <label for="">YouTubeID Fin</label>
-                                <input type="text" class="form-control" placeholder="YouTubeID Fin" id="conf-video-fin" data-id="fin">
-                            </div>
-                            <div class="conf-controls">
-                                <label for="">Controles</label>
-                                <div class="duration">
-                                    <label for="" class="mini-label">Duración</label>
-                                    <input type="range" class="form-range" min="0" max="100" value="0" id="video-current-time">
-                                    <div class="duration-times">
-                                        <label for="" class="mini-label" id="video-current-time-label">0:00</label>
-                                        <!-- <div class="fill"></div> -->
-                                        <label for="" class="mini-label" id="video-time-left">0:00</label>
-                                        <label for="" class="mini-label" id="video-duration">0:00</label>
-                                    </div>
-                                </div>
-                                <div class="play-container">
-                                    <i class="fas fa-play-circle play-btn"></i>
-                                    <i class="fas fa-pause-circle pause-btn" style="display:none;"></i>
-                                </div>
+        <!-- <h2>Configuración</h2> -->
+        <center>
+            <!-- <div class="megabox"> -->
+                <div class="border border-secondary box">
+                    <span>Logos</span>
+                    <hr>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-outline-primary changer changer-active" logo-name="logoCaldas-512.png" nombre="live-online">Caldas</button>
+                        <button type="button" class="btn btn-outline-primary changer" logo-name="logoJovenes-512.png" nombre="jovenes">Jovenes</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-outline-primary changer" logo-name="logoExploradores-512.png" nombre="exploradores">Exploradores</button>
+                        <button type="button" class="btn btn-outline-primary changer" logo-name="ASolasConEl-512.png" nombre="ASolasConEl">A solas con Él</button>
+                    </div>
+                </div>
+
+                <div class="border border-secondary box">
+                    <span>Escenas</span>
+                    <hr>
+                    <div class="btn-group scene-switcher" role="group">
+                        <button type="button" class="btn btn-outline-primary checked" value="inicio">Inicio</button>
+                        <button type="button" class="btn btn-outline-primary" value="main">Main</button>
+                        <button type="button" class="btn btn-outline-primary" value="fin">Fin</button>
+                        <button type="button" class="btn btn-outline-primary" value="transicion">Transición</button>
+                    </div>
+                </div>
+                <div class="border border-secondary box">
+                    <span>Videos</span>
+                    <hr>
+                    <div class="conf-video">
+                        <label for="">YouTubeID Inicio</label>
+                        <input type="text" class="form-control" placeholder="YouTubeID Inicio" id="conf-video-inicio" data-id="inicio">
+                    </div>
+                    <div class="conf-video">
+                        <label for="">YouTubeID Fin</label>
+                        <input type="text" class="form-control" placeholder="YouTubeID Fin" id="conf-video-fin" data-id="fin">
+                    </div>
+                </div>
+                <div class="border border-secondary box conf-controls">
+                    <span>Controles</span>
+                    <hr>
+                    <div class="">
+                        <div class="duration">
+                            <label for="" class="mini-label">Duración</label>
+                            <input type="range" class="form-range" min="0" max="100" value="0" id="video-current-time">
+                            <div class="duration-times">
+                                <label for="" class="mini-label" id="video-current-time-label">0:00</label>
+                                <!-- <div class="fill"></div> -->
+                                <label for="" class="mini-label" id="video-time-left">0:00</label>
+                                <label for="" class="mini-label" id="video-duration">0:00</label>
                             </div>
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="3">Switch</td>
-                </tr>
-                <tr>
-                    <td colspan="3">
-                        <div class="switch btn-group" role="group">
-                            <button type="button" class="btn btn-outline-primary" id="banner-switch" value="banner">Banner</button>
-                            <button type="button" class="btn btn-outline-primary checked" id="logo-switch" value="logo">Logo</button>
+                        <div class="play-container">
+                            <i class="fas fa-play-circle play-btn"></i>
+                            <i class="fas fa-pause-circle pause-btn" style="display:none;"></i>
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="3">
-                        <div class="tema-switcher btn-group" role="group" style="display:none;">
-                            <button type="button" class="btn btn-outline-primary checked" value="banner">Banner</button>
-                            <button type="button" class="btn btn-outline-primary" id="tema-switch" value="tema">Tema</button>
+                    </div>
+                </div>
+                <div class="border border-secondary box">
+                    <span>Switch</span>
+                    <hr>
+                    <div class="switch btn-group" role="group">
+                        <button type="button" class="btn btn-outline-primary" id="banner-switch" value="banner">Banner</button>
+                        <button type="button" class="btn btn-outline-primary checked" id="logo-switch" value="logo">Logo</button>
+                    </div>
+                    <div class="tema-switcher btn-group" role="group" style="display:none;">
+                        <button type="button" class="btn btn-outline-primary checked" value="banner">Banner</button>
+                        <button type="button" class="btn btn-outline-primary" id="tema-switch" value="tema">Tema</button>
+                    </div>
+                </div>
+                <div class="border border-secondary box tema-fila" style="display:none;">
+                    <span>Tema</span>
+                    <hr>
+                    <input type="text" class="form-control" placeholder="Tema" id="tema-input">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline-primary" name="button" id="tema-aplicar">Aplicar</button>
+                        <button type="button" class="btn btn-outline-primary" name="button" id="tema-limpiar">Limpiar</button>
+                    </div>
+                </div>
+                <div class="border border-secondary box">
+                    <span>Predicador</span>
+                    <hr>
+                    <input type="text" class="form-control" placeholder="Predicador" id="contacto">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline-primary" name="button" id="contacto-aplicar">Aplicar</button>
+                        <button type="button" class="btn btn-outline-primary" name="button" id="contacto-limpiar">Limpiar</button>
+                    </div>
+                </div>
+                <div class="border border-secondary box">
+                    <span>Posición logo</span>
+                    <hr>
+                    <div class="logo-pos border border-secondary rounded">
+                        <div class="logo-pos-1 border border-secondary">1</div>
+                        <div class="logo-pos-2 border border-secondary">2</div>
+                        <div class="logo-pos-3 border border-secondary">3</div>
+                        <div class="logo-pos-4 border border-secondary checked">4</div>
+                    </div>
+                </div>
+                <div class="border border-secondary box">
+                    <span>Temporizador</span>
+                    <hr>
+                    <input type="text" class="form-control timer" placeholder="Timer">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline-primary" name="button" id="timer-empezar">Empezar</button>
+                        <button type="button" class="btn btn-outline-primary" name="button" id="timer-parar">Parar</button>
+                    </div>
+                </div>
+                <div class="border border-secondary box">
+                    <span>Activadores</span>
+                    <hr>
+                    <div class="megabox">
+                        <div class="" id="youtube">
+                            <button type="button" name="button" class="btn btn-danger activador" id="btn-youtube" data-selector="youtube">
+                                <i class="fab fa-youtube fa-2x" data-selector="youtube"></i>
+                            </button>
                         </div>
-                    </td>
-                </tr>
-                <tr class="tema-fila" style="display:none;">
-                    <td colspan="2">
-                        <input type="text" class="form-control" placeholder="Tema" id="tema-input">
-                    </td>
-                    <td>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-outline-primary" name="button" id="tema-aplicar">Aplicar</button>
-                            <button type="button" class="btn btn-outline-primary" name="button" id="tema-limpiar">Limpiar</button>
+                        <div class="" id="facebook">
+                            <button type="button" name="button" class="btn btn-facebook activador" id="btn-facebook" data-selector="facebook">
+                                <i class="fab fa-facebook-f fa-2x" data-selector="facebook"></i>
+                            </button>
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <input type="text" class="form-control" placeholder="Predicador" id="contacto">
-                    </td>
-                    <td colspan="1">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-outline-primary" name="button" id="contacto-aplicar">Aplicar</button>
-                            <button type="button" class="btn btn-outline-primary" name="button" id="contacto-limpiar">Limpiar</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="3">
-                        <div class="logo-pos border border-secondary rounded">
-                            <div class="logo-pos-1 border border-secondary">1</div>
-                            <div class="logo-pos-2 border border-secondary">2</div>
-                            <div class="logo-pos-3 border border-secondary">3</div>
-                            <div class="logo-pos-4 border border-secondary checked">4</div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="3">Temporizador</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <input type="text" class="form-control timer" placeholder="Timer">
-                    </td>
-                    <td>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-outline-primary" name="button" id="timer-empezar">Empezar</button>
-                            <button type="button" class="btn btn-outline-primary" name="button" id="timer-parar">Parar</button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table>
-            <tbody>
-                <tr>
-                    <th colspan="2">Activadores</th>
-                </tr>
-                <tr>
-                    <td id="youtube">
-                        <button type="button" name="button" class="btn btn-danger activador" id="btn-youtube" data-selector="youtube">
-                            <i class="fab fa-youtube fa-2x" data-selector="youtube"></i>
-                        </button>
-                    </td>
-                    <td id="facebook">
-                        <button type="button" name="button" class="btn btn-facebook activador" id="btn-facebook" data-selector="facebook">
-                            <i class="fab fa-facebook-f fa-2x" data-selector="facebook"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <span id="time-activadores"></span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    </div>
+                    <span id="time-activadores" class="hint"></span>
+                </div>
+        </center>
     </body>
 </html>

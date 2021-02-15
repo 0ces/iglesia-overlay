@@ -1,16 +1,22 @@
+:root {
+    --main-color: #000;
+    --main-bg: #fff;
+}
+
 * {
     margin: 0;
     box-sizing: border-box;
     transition: all 1s;
+    color: var(--main-color);
 }
 
 body {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #16161a;
-    color: #fffffe;
+    background: var(--main-bg);
+    color: ;
     padding: 10px;
 }
 
@@ -24,6 +30,10 @@ table {
     margin: 10px;
     width: 80px;
     height: 80px;
+}
+
+.fab {
+    color: #fff;
 }
 
 .btn-facebook {
@@ -192,4 +202,37 @@ td {
     width: 100%;
     font-size: 32px;
     cursor: pointer;
+}
+
+.box {
+    display: inline-flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 10px;
+    padding: 10px;
+    min-width: 300px;
+    /* float: left; */
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    border-radius: 5px;
+}
+
+.box span {
+    text-align: center;
+    font-family: 'PT Sans';
+    font-weight: 700;
+    font-size: 18px;
+}
+
+
+.megabox {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.hint {
+    color: var(--main-color);
+    opacity: 0.6;
+    font-size: 12px !important;
 }
