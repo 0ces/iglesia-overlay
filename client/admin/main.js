@@ -107,10 +107,10 @@ $(document).ready(() => {
         let selected = $(e.target).attr('value');
         if (selected === 'logo'){
             $('.tema-switcher').hide();
-            $('.logo-pos').show();
+            $('.logo-pos-parent').show();
         } else {
             $('.tema-switcher').show();
-            $('.logo-pos').hide();
+            $('.logo-pos-parent').hide();
         }
         socket.emit('banner', selected);
     });
