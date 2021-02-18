@@ -36,6 +36,7 @@ $(document).ready(() => {
     let video_duration;
     let timePassed = 0;
     let timeBtw = 1000*60*20;
+    let duracionVideo = 0;
 
     $('input[type="text"]').val('');
 
@@ -65,7 +66,8 @@ $(document).ready(() => {
     });
 
     socket.on('youtube-data', (data) => {
-        $('#video-duration').text(minutosAString(data.duration));
+        duracionVideo = minutosAString(data.duration);
+        $('#video-duration').text(duracionVideo);
     });
 
     socket.on('youtube-current-time', (data) => {
@@ -167,8 +169,16 @@ $(document).ready(() => {
                 // $('.banner-switch button')[0].click();
             }
         }, 2000);
+        if ('fin' === seleccionado) {
+            timer = new Timer({
+                segundos: parseTime(duracionVideo)*60-10,
+                elemento: '.timer',
+                callback: () => {$('.scene-switcher button')[3].click();}
+            })
+        }
         if (['inicio', 'fin'].indexOf(seleccionado) >= 0){
             $('.conf-controls').show();
+            $('.logo-pos-4').click();
         } else {
             $('.conf-controls').hide();
         }

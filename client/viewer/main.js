@@ -185,6 +185,7 @@ $(document).ready(() => {
             $('#transicion').addClass('show');
             $('.logos').removeClass('center scale');
             $('.logos').addClass('center scale');
+            currentPlayer = null;
         }
 
         if (currentPlayer) {
