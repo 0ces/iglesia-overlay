@@ -199,18 +199,23 @@ $(document).ready(() => {
         $('.logos').toggleClass('hide-any show-any');
         setTimeout(() => {
             $('.logos').removeClass('top bottom left right center');
+            $('span.hint#hora').removeClass('bottom top');
             switch (selected) {
                 case 1:
                     $('.logos').addClass('top left');
+                    $('span.hint#hora').addClass('bottom');
                     break;
                 case 2:
                     $('.logos').addClass('top right');
+                    $('span.hint#hora').addClass('bottom');
                     break;
                 case 3:
                     $('.logos').addClass('bottom left');
+                    $('span.hint#hora').addClass('top');
                     break;
                 case 4:
                     $('.logos').addClass('bottom right');
+                    $('span.hint#hora').addClass('top');
                     break;
             }
             $('.logos').toggleClass('hide-any show-any');
