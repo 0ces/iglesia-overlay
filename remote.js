@@ -67,3 +67,5 @@ function main() {
         console.log('Listening on *:3001');
     });
 }
+
+main()
