@@ -27,7 +27,6 @@ function parseTime(str){
 function autoSizeText() {
     var el, elements, _i, _len, _results;
     elements = $('.resize');
-    // console.log(elements);
     if (elements.length < 0) {
         return;
     }

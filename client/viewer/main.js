@@ -50,8 +50,6 @@ function getDataFromPlayer(player) {
 
 function onPlayerReady(event) {
     let player = event.target;
-    // player.playVideo();
-    // player.pauseVideo();
     player.setPlaybackQuality('hd1080');
     socket.emit('youtube-data', getDataFromPlayer(player));
 }
@@ -82,10 +80,6 @@ $(document).ready(() => {
         }, 14000);
     });
 
-    // setTimeout(() => {
-    //     $('#YTPlayer').replaceWith('<div id="YTPlayer" class="full"></div>');
-    // }, 5000);
-
     socket.on('banner', (checked) => {
         if (checked === 'logo' && $('.banner').hasClass('show')){
             $('.banner').removeClass('show');
@@ -107,7 +101,6 @@ $(document).ready(() => {
         $('.logo').attr('src', `../static/${data.logo}`);
         $('.titulo div').addClass('disable');
         $(`.${data.nombre}`).removeClass('disable');
-        // $('.contacto-container').addClass('disable');
         currentLogo = data.nombre;
         $('.titulo div').addClass('disable');
         $(`.${currentLogo}`).removeClass('disable');
@@ -147,8 +140,6 @@ $(document).ready(() => {
         $('.escena').addClass('hide');
         console.log(`Cambio de escena ${seleccionado}`);
         $('.logos').removeClass('scale center');
-        // $('#transicion').removeClass('show');
-        // $('#transicion').addClass('hide');
         currentScene = seleccionado;
         console.log($('#black'), seleccionado);
         if (seleccionado === 'inicio'){
@@ -218,7 +209,6 @@ $(document).ready(() => {
                     break;
             }
             $('.logos').toggleClass('hide-any show-any');
-            // setTimeout(()=>{$('.logos').removeClass('show-any');},2000);
         }, 2100);
     });
 
@@ -234,7 +224,6 @@ $(document).ready(() => {
                 'onStateChange': onStateChange,
             },
             playerVars: {
-                // 'autoplay': 1,
                 'controls': 0,
             }
         });
@@ -270,8 +259,6 @@ $(document).ready(() => {
             $('.titulo div').addClass('disable');
             $(`.${currentLogo}`).removeClass('disable');
             $(`.${currentLogo}`).addClass('show-any');
-            // $('.contacto,.encabezado').show();
-            // setTimeout(()=>{$(`.${currentLogo}`).removeClass('show-any');},2000);
         }
     });
 
@@ -280,8 +267,6 @@ $(document).ready(() => {
         $('.titulo .tema span').css('font-size', '100px');
         $('.titulo .tema span').text(`“${data.tema}”`);
         $('.titulo .tema').addClass('show-any');
-        // $('.contacto,.encabezado').hide();
-        // setTimeout(()=>{$('.titulo .tema').removeClass('show-any');},2000);
         $('.titulo .tema').removeClass('disable');
         autoSizeText();
     });
@@ -290,10 +275,3 @@ $(document).ready(() => {
         $('.contacto span').text(data.valor);
     });
 });
-
-
-
-
-// setInterval(() => {
-//
-// }, 5000);
