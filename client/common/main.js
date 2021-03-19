@@ -3,6 +3,18 @@ function pad (str, max) {
     return str.length < max ? pad("0" + str, max) : str;
 }
 
+function formatAMPM(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = `${pad(hours,2)}:${pad(minutes,2)}:${pad(seconds,2)} ${ampm}`;
+    return strTime;
+}
+
 function isUndefined(variable) {
     return typeof variable === 'undefined';
 }

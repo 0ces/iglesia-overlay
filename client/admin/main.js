@@ -282,6 +282,10 @@ $(document).ready(() => {
             socket.emit('get-youtube-current-time');
         }
     }, 1000);
+
+    $('#toggle-hora').click((e) => {
+        socket.emit('toggle-hora');
+    })
 });
 
 // setInterval(() => {

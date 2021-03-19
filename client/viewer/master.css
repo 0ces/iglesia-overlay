@@ -448,6 +448,13 @@ img {
     padding: 0px 20px;
 }
 
+span.hint {
+    position: fixed;
+    font-family: 'Roboto';
+    font-weight: 300;
+    color: rgba(255,255,255,0.6);
+}
+
 .bottom {
     bottom: 0;
 }
@@ -565,4 +572,14 @@ img {
 
 .disable {
     display: none;
+}
+
+span.hint#hora {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    text-align: center;
+    width: 100%;
+    font-size: 18px;
+    color: #fff;
 }

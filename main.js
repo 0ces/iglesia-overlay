@@ -5,6 +5,7 @@ const server1 = http.Server(app);
 const fs = require('fs');
 const path = require('path');
 const io = require('socket.io')(server1);
+const ioc = require("socket.io-client");
 const admin = io.of('/admin');
 const viewer = io.of('/viewer');
 const repo = '0ces/iglesia-overlay';
@@ -72,7 +73,6 @@ function main() {
         console.log(`Se ha conectado ${address} a /admin`)
 
         socket.on('*', (packet) => {
-            // console.log(packet);
             socket.broadcast.emit(packet.data[0], packet.data[1]);
             viewer.emit(packet.data[0], packet.data[1]);
         });
@@ -95,6 +95,11 @@ function main() {
             socket.broadcast.emit(packet.data[0], packet.data[1]);
             admin.emit(packet.data[0], packet.data[1]);
         });
+
+        socket.on('debug', (debug) => {
+            let address = socket.handshake.address.replace('::ffff:', '');
+            console.log(`DEBUG VIEWER ${address}: ${debug}`);
+        })
     });
 
     server1.listen(3000, () => {

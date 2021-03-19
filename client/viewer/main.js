@@ -1,4 +1,5 @@
 const socket = io('/viewer');
+const VIDEOVOLDEF = 50;
 
 function fadeVol(player, from, to,  duration) {
     const initial_vol = from;
@@ -69,6 +70,10 @@ $(document).ready(() => {
     let currentScene = 'inicio';
     let currentLogo = 'live-online';
 
+    setInterval(() => {
+        $('span.hint#hora').text(formatAMPM(new Date()));
+    }, 1000);
+
     socket.on('shower', (data) => {
         $('.banner').addClass('blur-ani');
         $(`.${data.nombre}`).toggleClass('hide show');
@@ -124,7 +129,7 @@ $(document).ready(() => {
                     }
                     if (currentScene === 'fin'){
                         if (currentPlayer)
-                        fadeVol(currentPlayer, 100, 0, 10);
+                        fadeVol(currentPlayer, VIDEOVOLDEF, 0, 10);
                         $('#fin').removeClass('show');
                         $('#fin').addClass('hide');
                     }
@@ -181,12 +186,12 @@ $(document).ready(() => {
 
         if (currentPlayer) {
             currentPlayer.seekTo(0, true);
-            fadeVol(currentPlayer, 0, 100, 5);
+            fadeVol(currentPlayer, 0, VIDEOVOLDEF, 5);
         } else {
             if (players.inicio)
-            fadeVol(players.inicio, 100, 0, 10);
+            fadeVol(players.inicio, VIDEOVOLDEF, 0, 10);
             if (players.fin)
-            fadeVol(players.fin, 100, 0, 10);
+            fadeVol(players.fin, VIDEOVOLDEF, 0, 10);
         }
     });
 
@@ -238,6 +243,8 @@ $(document).ready(() => {
 
     socket.on('youtube-play', () => {
         currentPlayer.playVideo();
+        currentPlayer.setVolume(50);
+        $('span.hint.titulovideo').text(`Reproduciendo: ${currentPlayer.getVideoData().title}`);
     });
 
     socket.on('youtube-pause', () => {
@@ -274,4 +281,19 @@ $(document).ready(() => {
     socket.on('contacto', (data) => {
         $('.contacto span').text(data.valor);
     });
+
+    try {
+    	socket.emit('debug', `Version obsstudio plugin: ${window.obsstudio.pluginVersion}`);
+    } catch (e) {
+        socket.emit('debug', 'No existe obsstudio')
+    }
+
+    window.addEventListener('obsSceneChanged', function(e) {
+    	socket.emit('debug', `Se ha cambiado la scena a: ${e.detail.name}`);
+    })
+
+    socket.on('toggle-hora', () => {
+        $('span.hint#hora').toggle()
+    })
+
 });
