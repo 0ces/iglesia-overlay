@@ -69,6 +69,7 @@ $(document).ready(() => {
     let currentPlayer;
     let currentScene = 'inicio';
     let currentLogo = 'live-online';
+    let horaShow = true;
 
     setInterval(() => {
         $('span.hint#hora').text(formatAMPM(new Date()));
@@ -147,6 +148,9 @@ $(document).ready(() => {
         $('.logos').removeClass('scale center');
         currentScene = seleccionado;
         console.log($('#black'), seleccionado);
+        if(horaShow){
+            $('span.hint#hora').show();
+        }
         if (seleccionado === 'inicio'){
             $('#black').removeClass('hide-any');
             $('#black').addClass('show-any');
@@ -154,7 +158,6 @@ $(document).ready(() => {
             $('#inicio').addClass('show');
             currentPlayer = players.inicio;
         }
-
         if (seleccionado === 'main'){
             $('#black').removeClass('show-any');
             $('#black').addClass('hide-any');
@@ -181,6 +184,7 @@ $(document).ready(() => {
             $('#transicion').addClass('show');
             $('.logos').removeClass('center scale');
             $('.logos').addClass('center scale');
+            $('span.hint#hora').hide();
             currentPlayer = null;
         }
 
@@ -298,7 +302,8 @@ $(document).ready(() => {
     })
 
     socket.on('toggle-hora', () => {
-        $('span.hint#hora').toggle()
+        $('span.hint#hora').toggle();
+        horaShow = !horaShow;
     })
 
 });
