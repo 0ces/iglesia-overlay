@@ -30,7 +30,7 @@ function main() {
     app.use(express.static("client"));
     app.use(express.static("client/admin"));
 
-    app.get('/overlay/remote/admin', (req, res) => {
+    app.get('/admin', (req, res) => {
         res.sendFile('client/admin/index.html', { root: __dirname })
     });
 
