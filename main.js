@@ -15,6 +15,8 @@ const get = require('get-file');
 
 let middleware = require('socketio-wildcard')();
 
+let mainConn = null;
+
 admin.use(middleware);
 viewer.use(middleware);
 
@@ -51,6 +53,12 @@ if (process.argv.indexOf('--no-git') >= 0){
         console.log('Termino!');
         main();
     });
+    try {
+        let mainConn = ioc('ws://181.55.32.212');
+        
+    } catch (e) {
+        console.error('Error:',e);
+    }
 }
 
 function main() {

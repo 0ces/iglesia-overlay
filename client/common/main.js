@@ -3,6 +3,16 @@ function pad (str, max) {
     return str.length < max ? pad("0" + str, max) : str;
 }
 
+const getMethods = (obj) => {
+    let properties = new Set()
+    let currentObj = obj
+    do {
+        Object.getOwnPropertyNames(currentObj).map(item => properties.add(item))
+    } while ((currentObj = Object.getPrototypeOf(currentObj)))
+    return [...properties.keys()].filter(item => typeof obj[item] === 'function')
+}
+
+
 function formatAMPM(date) {
     var hours = date.getHours();
     var minutes = date.getMinutes();
