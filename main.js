@@ -107,12 +107,13 @@ function main() {
 
     if (remote.connected) {
         console.log(`Se ha conectado correctamente al main.`);
-        remote.on('remote', (packet) => {
-            viewer.emit(packet.data[0], packet.data[1]);
-        });
     } else {
         console.log('No se ha conectado al remote.');
     }
+
+    remote.on('remote', (packet) => {
+        viewer.emit(packet.data[0], packet.data[1]);
+    });
 
     server1.listen(3000, () => {
         console.log('Listening on *:3000');
