@@ -26,38 +26,11 @@ function downloadFile(repo, path) {
     });
 }
 
-async function getFilesFromRepo(repo){
-    let treeFromRepo = await tree(repo, {recursive:true}).then(res => res.tree);
-    treeFromRepo.forEach((file, i) => {
-        if(file.path.startsWith('remote')){
-            if (file.type === 'tree'){
-                console.log(`Creando carpeta ${file.path}`);
-                fs.mkdir(file.path, (error) => {
-                    if (error) return console.error(error);
-                });
-            }
-            if (file.type === 'blob'){
-                console.log(`Descargando archivo ${file.path}`);
-                downloadFile(repo, file.path);
-            }
-        }
-    });
-}
-
-if (process.argv.indexOf('--no-git') >= 0){
-    main();
-} else {
-    getFilesFromRepo(repo).then(() => {
-        console.log('Termino!');
-        main();
-    });
-}
-
 function main() {
     app.use(express.static("client"));
 
     app.get('/overlay/remote/admin', (req, res) => {
-        res.sendFile('client/admin/index.html')
+        res.sendFile('client/admin/index.html', { root: __dirname })
     });
 
     admin.on('connection', (socket) => {
