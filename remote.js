@@ -7,7 +7,7 @@ const path = require('path');
 const io = require('socket.io')(server1);
 const ioc = require("socket.io-client");
 const admin = io.of('/admin');
-const viewer = io.of('/viewer');
+const remote = io.of('/remote');
 const repo = '0ces/iglesia-overlay';
 const https = require('https');
 const tree = require('github-trees');
@@ -15,10 +15,8 @@ const get = require('get-file');
 
 let middleware = require('socketio-wildcard')();
 
-let remote = ioc('ws://oces.ml:3001/admin');
-
 admin.use(middleware);
-viewer.use(middleware);
+remote.use(middleware);
 
 function downloadFile(repo, path) {
     get(repo, path, (error, response) => {
@@ -31,7 +29,7 @@ function downloadFile(repo, path) {
 async function getFilesFromRepo(repo){
     let treeFromRepo = await tree(repo, {recursive:true}).then(res => res.tree);
     treeFromRepo.forEach((file, i) => {
-        if(file.path.startsWith('client')){
+        if(file.path.startsWith('remote')){
             if (file.type === 'tree'){
                 console.log(`Creando carpeta ${file.path}`);
                 fs.mkdir(file.path, (error) => {
@@ -57,16 +55,8 @@ if (process.argv.indexOf('--no-git') >= 0){
 
 function main() {
     app.use(express.static("client"));
-    app.use(express.static("client/viewer"));
-    app.get('/', (req, res) => {
-        res.sendFile('client/viewer/index.html');
-    });
 
-    app.get('/viewer', (req, res) => {
-        res.sendFile('client/viewer/index.html');
-    });
-
-    app.get('/admin', (req, res) => {
+    app.get('/overlay/remote/admin', (req, res) => {
         res.sendFile('client/admin/index.html')
     });
 
@@ -76,7 +66,7 @@ function main() {
 
         socket.on('*', (packet) => {
             socket.broadcast.emit(packet.data[0], packet.data[1]);
-            viewer.emit(packet.data[0], packet.data[1]);
+            remote.emit('remote', [packet.data[0], packet.data[1]]);
         });
 
         socket.on('disconnect', () => {
@@ -85,36 +75,22 @@ function main() {
 
     });
 
-    viewer.on('connection', (socket) => {
+    remote.on('connection', (socket) => {
         let address = socket.handshake.address.replace('::ffff:', '');
-        console.log(`Se ha conectado ${address} a /viewer`)
-
-        socket.on('disconnect', () => {
-            console.log('User disconnected from /viewer');
-        });
+        console.log(`Se ha conectado ${address} a /admin`)
 
         socket.on('*', (packet) => {
             socket.broadcast.emit(packet.data[0], packet.data[1]);
             admin.emit(packet.data[0], packet.data[1]);
-
         });
 
-        socket.on('debug', (debug) => {
-            let address = socket.handshake.address.replace('::ffff:', '');
-            console.log(`DEBUG VIEWER ${address}: ${debug}`);
-        })
+        socket.on('disconnect', () => {
+            console.log('User disconnected from /admin');
+        });
+
     });
 
-    if (remote.connected) {
-        console.log(`Se ha conectado correctamente al main.`);
-        remote.on('remote', (packet) => {
-            viewer.emit(packet.data[0], packet.data[1]);
-        });
-    } else {
-        console.log('No se ha conectado al remote.');
-    }
-
-    server1.listen(3000, () => {
-        console.log('Listening on *:3000');
+    server1.listen(3001, () => {
+        console.log('Listening on *:3001');
     });
 }
