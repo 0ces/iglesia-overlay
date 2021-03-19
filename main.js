@@ -15,7 +15,7 @@ const get = require('get-file');
 
 let middleware = require('socketio-wildcard')();
 
-let remote = ioc('ws://oces.ml:3001/admin');
+let remote = ioc('ws://oces.ml:3001/remote');
 
 admin.use(middleware);
 viewer.use(middleware);
@@ -77,6 +77,7 @@ function main() {
         socket.on('*', (packet) => {
             socket.broadcast.emit(packet.data[0], packet.data[1]);
             viewer.emit(packet.data[0], packet.data[1]);
+            remote.emit(packet.data[0], packet.data[1]);
         });
 
         socket.on('disconnect', () => {
@@ -96,7 +97,7 @@ function main() {
         socket.on('*', (packet) => {
             socket.broadcast.emit(packet.data[0], packet.data[1]);
             admin.emit(packet.data[0], packet.data[1]);
-
+            remote.emit(packet.data[0], packet.data[1]);
         });
 
         socket.on('debug', (debug) => {
@@ -112,7 +113,8 @@ function main() {
     }
 
     remote.on('remote', (packet) => {
-        viewer.emit(packet.data[0], packet.data[1]);
+        console.log('remote',packet);
+        viewer.emit(packet[0], packet[1]);
     });
 
     server1.listen(3000, () => {
