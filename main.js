@@ -113,7 +113,6 @@ function main() {
     }
 
     remote.on('remote', (packet) => {
-        console.log('remote',packet);
         viewer.emit(packet[0], packet[1]);
     });
 
