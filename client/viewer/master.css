@@ -408,13 +408,27 @@ img {
     text-align: center;
 }
 
+@keyframes text-glow {
+    0% {
+        text-shadow: 0px 0px 8px #fff;
+    }
+    50% {
+        text-shadow: 0px 0px 0px #fff;
+    }
+    100% {
+        text-shadow: 0px 0px 8px #fff;
+    }
+}
+
 .pantalla-info h1 {
     font-size: 150px;
     max-width: 60vw;
+    animation: text-glow 10s infinite;
 }
 
 .pantalla-info h2 {
     font-size: 60px;
+    animation: text-glow 10s infinite;
 }
 
 .blur {
