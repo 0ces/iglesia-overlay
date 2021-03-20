@@ -196,6 +196,7 @@ $(document).ready(() => {
 
             if (currentPlayer) {
                 currentPlayer.seekTo(0, true);
+                $(`span.hint.titulovideo`).text(`Reproduciendo: ${currentPlayer.getVideoData().title}`);
                 fadeVol(currentPlayer, 0, VIDEOVOLDEF, 5);
             } else {
                 if (players.inicio)
@@ -259,7 +260,7 @@ $(document).ready(() => {
         socket.on('youtube-play', () => {
             currentPlayer.playVideo();
             currentPlayer.setVolume(50);
-            $('span.hint.titulovideo').text(`Reproduciendo: ${currentPlayer.getVideoData().title}`);
+            $(`span.hint.titulovideo`).text(`Reproduciendo: ${currentPlayer.getVideoData().title}`);
         });
 
         socket.on('youtube-pause', () => {
