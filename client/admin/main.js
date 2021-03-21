@@ -20,10 +20,6 @@ if (remote.connected) {
     console.log('No se ha conectado al remote.');
 }
 
-remote.on('remote', (packet) => {
-    viewer.emit(packet[0], packet[1]);
-});
-
 function activate(selector){
     $('.activador').prop('disabled', true);
     setTimeout(() => {
@@ -297,7 +293,11 @@ $(document).ready(() => {
 
     $('#toggle-hora').click((e) => {
         socket.emit('toggle-hora');
-    })
+    });
+
+    remote.on('remote', (packet) => {
+        socket.emit(packet[0], packet[1]);
+    });
 });
 
 // setInterval(() => {
