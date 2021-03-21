@@ -40,6 +40,7 @@ function main() {
 
         socket.on('*', (packet) => {
             socket.broadcast.emit(packet.data[0], packet.data[1]);
+            console.log(`Admin ${address} mandó: ${packet}`);
             remote.emit('remote', [packet.data[0], packet.data[1]]);
         });
 
@@ -55,6 +56,7 @@ function main() {
 
         socket.on('*', (packet) => {
             socket.broadcast.emit(packet.data[0], packet.data[1]);
+            console.log(`Remote ${address} mandó: ${packet}`);
             admin.emit(packet.data[0], packet.data[1]);
         });
 
