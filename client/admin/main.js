@@ -11,6 +11,7 @@
 //         },2000);
 //     }
 // }
+let remoteurl = 'http://oces.ml:3001'
 
 let remote = io('ws://oces.ml:3001/remote');
 
@@ -295,9 +296,11 @@ $(document).ready(() => {
         socket.emit('toggle-hora');
     });
 
-    remote.on('remote', (packet) => {
-        socket.emit(packet[0], packet[1]);
-    });
+    if (location.origin !== remoteurl){
+        remote.on('remote', (packet) => {
+            socket.emit(packet[0], packet[1]);
+        });
+    }
 });
 
 // setInterval(() => {
