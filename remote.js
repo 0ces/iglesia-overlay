@@ -44,7 +44,7 @@ function main() {
         });
 
         socket.on('disconnect', () => {
-            console.log('User disconnected from /admin');
+            console.log(`User ${address} disconnected from /admin`);
         });
 
     });
