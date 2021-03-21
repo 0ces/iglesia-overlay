@@ -78,7 +78,7 @@ $(document).ready(() => {
         let horaShow = false;
 
         setInterval(() => {
-            $('span.hint#hora').text(formatAMPM(new Date()));
+            $('.horaspan#hora').text(formatAMPM(new Date()));
         }, 1000);
 
         socket.on('shower', (data) => {
@@ -155,7 +155,7 @@ $(document).ready(() => {
             currentScene = seleccionado;
             console.log($('#black'), seleccionado);
             if(horaShow){
-                $('span.hint#hora').show();
+                $('.horaspan#hora').show();
             }
             if (seleccionado === 'inicio'){
                 $('#black').removeClass('hide-any');
@@ -190,7 +190,7 @@ $(document).ready(() => {
                 $('#transicion').addClass('show');
                 $('.logos').removeClass('center scale');
                 $('.logos').addClass('center scale');
-                $('span.hint#hora').hide();
+                $('.horaspan#hora').hide();
                 currentPlayer = null;
             }
 
@@ -210,23 +210,23 @@ $(document).ready(() => {
             $('.logos').toggleClass('hide-any show-any');
             setTimeout(() => {
                 $('.logos').removeClass('top bottom left right center');
-                $('span.hint#hora').removeClass('bottom top');
+                $('.horaspan#hora').removeClass('bottom top');
                 switch (selected) {
                     case 1:
                         $('.logos').addClass('top left');
-                        $('span.hint#hora').addClass('bottom');
+                        $('.horaspan#hora').addClass('bottom');
                         break;
                     case 2:
                         $('.logos').addClass('top right');
-                        $('span.hint#hora').addClass('bottom');
+                        $('.horaspan#hora').addClass('bottom');
                         break;
                     case 3:
                         $('.logos').addClass('bottom left');
-                        $('span.hint#hora').addClass('top');
+                        $('.horaspan#hora').addClass('top');
                         break;
                     case 4:
                         $('.logos').addClass('bottom right');
-                        $('span.hint#hora').addClass('top');
+                        $('.horaspan#hora').addClass('top');
                         break;
                 }
                 $('.logos').toggleClass('hide-any show-any');
@@ -315,7 +315,7 @@ $(document).ready(() => {
         })
 
         socket.on('toggle-hora', () => {
-            $('span.hint#hora').toggle();
+            $('.horaspan#hora').toggle();
             horaShow = !horaShow;
         })
     } catch (e) {

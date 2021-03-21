@@ -13,14 +13,6 @@
 // }
 let remoteurl = 'http://oces.ml:3001'
 
-let remote = io('ws://oces.ml:3001/remote');
-
-if (remote.connected) {
-    console.log(`Se ha conectado correctamente al main.`);
-} else {
-    console.log('No se ha conectado al remote.');
-}
-
 function activate(selector){
     $('.activador').prop('disabled', true);
     setTimeout(() => {
@@ -297,7 +289,14 @@ $(document).ready(() => {
     });
 
     if (location.origin !== remoteurl){
+        let remote = io('ws://oces.ml:3001/remote');
+        if (remote.connected) {
+            console.log(`Se ha conectado correctamente al main.`);
+        } else {
+            console.log('No se ha conectado al remote.');
+        }
         remote.on('remote', (packet) => {
+            console.log(packet);
             socket.emit(packet[0], packet[1]);
         });
     }
