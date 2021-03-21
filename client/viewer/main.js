@@ -75,7 +75,7 @@ $(document).ready(() => {
         let currentPlayer;
         let currentScene = 'inicio';
         let currentLogo = 'live-online';
-        let horaShow = true;
+        let horaShow = false;
 
         setInterval(() => {
             $('span.hint#hora').text(formatAMPM(new Date()));
