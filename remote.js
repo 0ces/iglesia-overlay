@@ -4,10 +4,7 @@ const http = require('http');
 const server1 = http.Server(app);
 const fs = require('fs');
 const path = require('path');
-const io = require('socket.io')(server1, {
-  cors: {
-    origin: '*',
-  });
+const io = require('socket.io')(server1, {cors: {origin: '*'});
 const ioc = require("socket.io-client");
 const admin = io.of('/admin');
 const remote = io.of('/remote');
