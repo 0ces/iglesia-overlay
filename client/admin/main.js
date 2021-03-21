@@ -12,6 +12,18 @@
 //     }
 // }
 
+let remote = io('ws://oces.ml:3001/remote');
+
+if (remote.connected) {
+    console.log(`Se ha conectado correctamente al main.`);
+} else {
+    console.log('No se ha conectado al remote.');
+}
+
+remote.on('remote', (packet) => {
+    viewer.emit(packet[0], packet[1]);
+});
+
 function activate(selector){
     $('.activador').prop('disabled', true);
     setTimeout(() => {
