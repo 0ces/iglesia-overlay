@@ -288,18 +288,18 @@ $(document).ready(() => {
         socket.emit('toggle-hora');
     });
 
-    if (location.origin !== remoteurl){
-        let remote = io('ws://oces.ml:3001/remote');
-        if (remote.connected) {
-            console.log(`Se ha conectado correctamente al main.`);
-        } else {
-            console.log('No se ha conectado al remote.');
-        }
-        remote.on('remote', (packet) => {
-            console.log(packet);
-            socket.emit(packet[0], packet[1]);
-        });
-    }
+    // if (location.origin !== remoteurl){
+    //     let remote = io('ws://oces.ml:3001/remote');
+    //     if (remote.connected) {
+    //         console.log(`Se ha conectado correctamente al main.`);
+    //     } else {
+    //         console.log('No se ha conectado al remote.');
+    //     }
+    //     remote.on('remote', (packet) => {
+    //         console.log(packet);
+    //         socket.emit(packet[0], packet[1]);
+    //     });
+    // }
 });
 
 // setInterval(() => {
