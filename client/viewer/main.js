@@ -77,6 +77,14 @@ $(document).ready(() => {
         let currentLogo = 'live-online';
         let horaShow = false;
 
+        socket.emit('get-pexels-video', (videoUrl) => {
+            $('#video-bg-inicio').attr('src', videoUrl)
+        })
+        
+        socket.emit('get-pexels-video', (videoUrl) => {
+            $('#video-bg-fin').attr('src', videoUrl)
+        })
+
         setInterval(() => {
             $('.horaspan#hora').text(formatAMPM(new Date()));
         }, 1000);
@@ -158,13 +166,19 @@ $(document).ready(() => {
                 $('.horaspan#hora').show();
             }
             if (seleccionado === 'inicio'){
+                $('#video-bg-inicio').get(0).play()
+                $('#video-bg-fin').get(0).pause()
                 $('#black').removeClass('hide-any');
                 $('#black').addClass('show-any');
                 $('#inicio').removeClass('hide');
                 $('#inicio').addClass('show');
                 currentPlayer = players.inicio;
+                if (players.fin)
+                players.fin.pauseVideo()
             }
             if (seleccionado === 'main'){
+                $('#video-bg-inicio').get(0).pause()
+                $('#video-bg-fin').get(0).pause()
                 $('#black').removeClass('show-any');
                 $('#black').addClass('hide-any');
                 $('.escena').removeClass('show');
@@ -173,9 +187,13 @@ $(document).ready(() => {
             }
 
             if (seleccionado === 'fin'){
+                $('#video-bg-inicio').get(0).pause()
+                $('#video-bg-fin').get(0).play()
                 $('#black').removeClass('hide-any');
                 $('#black').addClass('show-any');
                 currentPlayer = players.fin;
+                if (players.inicio)
+                players.inicio.pauseVideo()
                 if (currentPlayer){
                     currentPlayer.playVideo();
                 }
@@ -184,6 +202,8 @@ $(document).ready(() => {
             }
 
             if (seleccionado === 'transicion'){
+                $('#video-bg-inicio').get(0).pause()
+                $('#video-bg-fin').get(0).pause()
                 $('#black').removeClass('hide-any');
                 $('#black').addClass('show-any');
                 $('#transicion').removeClass('hide');
@@ -234,7 +254,6 @@ $(document).ready(() => {
         });
 
         socket.on('youtube-source', (data) => {
-            $(`#${data.ID} video`).get(0).pause();
             $(`#YTPlayer-${data.ID}`).replaceWith(`<div id="YTPlayer-${data.ID}" class="full blur"></div>`);
             players[data.ID] = new YT.Player(`YTPlayer-${data.ID}`, {
                 height: '1920',

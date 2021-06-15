@@ -66,9 +66,9 @@
         </div>
 
         <div class="full pantalla show escena" id="inicio">
-            <video src="../static/inicio.mp4" autoplay loop muted width="1920" height="1080" class=""></video>
             <!-- <iframe id="YTPlayer" width="1920" height="1080" class="blur" src="https://www.youtube.com/embed/eRUM70CPYls?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
             <div id="YTPlayer-inicio"></div>
+            <video id="video-bg-inicio" src="" autoplay loop muted width="1920" height="1080" class="full blur bg"></video>
             <div class="full pantalla-info inicio">
                 <h1>
                     Bienvenidos a nuestra transmisión
@@ -78,10 +78,11 @@
             <span class="left bottom hint titulovideo"></span>
         </div>
         <div class="full pantalla hide escena" id="fin">
-            <video src="../static/fin.mp4" autoplay loop muted width="1920" height="1080" class=""></video>
+            
             <!-- <iframe id="YTPlayer" width="1920" height="1080" class="blur" src="https://www.youtube.com/embed/eRUM70CPYls?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-            <div id="YTPlayer-fin" class="full blur"></div>
-            <div class="full pantalla-info fin">
+            <div id="YTPlayer-fin" class="full"></div>
+            <video id="video-bg-fin" src="" autoplay loop muted width="1920" height="1080" class="full blur bg"></video>
+            <div class="full pantalla-info fin"> 
                 <h1>
                     Nuestra transmisión ha terminado
                 </h1>
