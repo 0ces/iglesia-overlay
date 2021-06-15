@@ -32,6 +32,7 @@
     "express": "^4.17.1",
     "get-file": "^2.0.0",
     "github-trees": "^0.2.0",
+    "pexels": "^1.2.1",
     "socket.io": "^3.0.5",
     "socket.io-client": "^3.0.5",
     "socketio-wildcard": "^2.0.0"
