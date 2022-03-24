@@ -12,6 +12,7 @@ const repo = '0ces/iglesia-overlay';
 const https = require('https');
 const tree = require('github-trees');
 const get = require('get-file');
+const pexels = require('pexels')
 
 let middleware = require('socketio-wildcard')();
 
@@ -58,10 +59,14 @@ if (process.argv.indexOf('--no-git') >= 0){
 }
 
 function main() {
-    https.request({
+
+    /* const pexelsClient = pexels.createClient('')
+
+    pexelsClient.collections.all({ per_page: 1 }).then(collections => {console.log(collections)}); */
+    /* https.request({
         host: 'api.pexels.com',
-        path: '/v1/collections/t5qwdo5',
-        headers: {'Authorization':'563492ad6f917000010000018039fde30b3f4d3cb4a4d6b3a9888e60'}
+        path: '/v1/collections/',
+        headers: {'Authorization':''}
     }, (res) => {
         let str = ''
         res.on('data', (data) => {
@@ -71,7 +76,7 @@ function main() {
         res.on('end', () => {
             dataFromPexels = JSON.parse(str)
         })
-    }).end()
+    }).end() */
 
     app.use(express.static("client"));
     app.use(express.static("client/viewer"));
@@ -113,7 +118,11 @@ function main() {
         });
 
         socket.on('get-pexels-video', (cb) => {
-            cb(dataFromPexels.media[Math.floor(Math.random()*dataFromPexels.media.length)].video_files.find(video => video.quality === 'hd').link)
+            // console.log(dataFromPexels)
+            // cb(dataFromPexels.media[Math.floor(Math.random()*dataFromPexels.media.length)].video_files.find(video => video.quality === 'hd').link)
+
+            // Temporal video until pexels stops returning 401
+            cb('https://vod-progressive.akamaized.net/exp=1648157659~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F2419%2F15%2F387099146%2F1632059286.mp4~hmac=1b98e3de48edcc9159aaf9dbe02589500499c7eeacc300b0b55514f7296c183f/vimeo-prod-skyfire-std-us/01/2419/15/387099146/1632059286.mp4?filename=video.mp4')
         })
 
         socket.on('*', (packet) => {

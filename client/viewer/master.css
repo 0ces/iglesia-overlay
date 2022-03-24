@@ -4,6 +4,12 @@
     color: #fff;
 }
 
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
 @font-face {
     font-family: 'Earworm';
     src: url('../static/Earworm.woff');
@@ -394,8 +400,8 @@ img {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
 }
 
 .pantalla-info {
